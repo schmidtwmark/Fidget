@@ -12,7 +12,7 @@ struct FidgetApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView()
+                ContentView(motion: MotionManager())
             }
         }
     }
