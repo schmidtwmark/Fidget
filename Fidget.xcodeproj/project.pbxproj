@@ -17,6 +17,12 @@
 		ED36A9832687B62000E1AF02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED36A9822687B62000E1AF02 /* Preview Assets.xcassets */; };
 		ED36A98E2687B62000E1AF02 /* FidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36A98D2687B62000E1AF02 /* FidgetTests.swift */; };
 		ED36A9992687B62000E1AF02 /* FidgetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36A9982687B62000E1AF02 /* FidgetUITests.swift */; };
+		ED8FEF2D2692054F00EFF1DF /* FidgetPhoneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FEF2C2692054F00EFF1DF /* FidgetPhoneApp.swift */; };
+		ED8FEF312692055100EFF1DF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED8FEF302692055100EFF1DF /* Assets.xcassets */; };
+		ED8FEF342692055100EFF1DF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED8FEF332692055100EFF1DF /* Preview Assets.xcassets */; };
+		ED8FEF3E2692055100EFF1DF /* FidgetPhoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FEF3D2692055100EFF1DF /* FidgetPhoneTests.swift */; };
+		ED8FEF482692055100EFF1DF /* FidgetPhoneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8FEF472692055100EFF1DF /* FidgetPhoneUITests.swift */; };
+		ED8FEF52269206B300EFF1DF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36A9792687B62000E1AF02 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +53,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = ED36A9672687B61D00E1AF02;
 			remoteInfo = "Fidget WatchKit App";
+		};
+		ED8FEF3A2692055100EFF1DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED36A95E2687B61D00E1AF02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED8FEF292692054F00EFF1DF;
+			remoteInfo = FidgetPhone;
+		};
+		ED8FEF442692055100EFF1DF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED36A95E2687B61D00E1AF02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED8FEF292692054F00EFF1DF;
+			remoteInfo = FidgetPhone;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -93,6 +113,14 @@
 		ED36A9942687B62000E1AF02 /* FidgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FidgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A9982687B62000E1AF02 /* FidgetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetUITests.swift; sourceTree = "<group>"; };
 		ED36A99A2687B62000E1AF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED8FEF2A2692054F00EFF1DF /* FidgetPhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FidgetPhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED8FEF2C2692054F00EFF1DF /* FidgetPhoneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetPhoneApp.swift; sourceTree = "<group>"; };
+		ED8FEF302692055100EFF1DF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED8FEF332692055100EFF1DF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ED8FEF392692055100EFF1DF /* FidgetPhoneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FidgetPhoneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED8FEF3D2692055100EFF1DF /* FidgetPhoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetPhoneTests.swift; sourceTree = "<group>"; };
+		ED8FEF432692055100EFF1DF /* FidgetPhoneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FidgetPhoneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED8FEF472692055100EFF1DF /* FidgetPhoneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetPhoneUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +145,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED8FEF272692054F00EFF1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8FEF362692055100EFF1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8FEF402692055100EFF1DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -127,6 +176,9 @@
 				ED36A9782687B62000E1AF02 /* Fidget WatchKit Extension */,
 				ED36A98C2687B62000E1AF02 /* FidgetTests */,
 				ED36A9972687B62000E1AF02 /* FidgetUITests */,
+				ED8FEF2B2692054F00EFF1DF /* FidgetPhone */,
+				ED8FEF3C2692055100EFF1DF /* FidgetPhoneTests */,
+				ED8FEF462692055100EFF1DF /* FidgetPhoneUITests */,
 				ED36A9652687B61D00E1AF02 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -139,6 +191,9 @@
 				ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */,
 				ED36A9892687B62000E1AF02 /* FidgetTests.xctest */,
 				ED36A9942687B62000E1AF02 /* FidgetUITests.xctest */,
+				ED8FEF2A2692054F00EFF1DF /* FidgetPhone.app */,
+				ED8FEF392692055100EFF1DF /* FidgetPhoneTests.xctest */,
+				ED8FEF432692055100EFF1DF /* FidgetPhoneUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +244,40 @@
 				ED36A99A2687B62000E1AF02 /* Info.plist */,
 			);
 			path = FidgetUITests;
+			sourceTree = "<group>";
+		};
+		ED8FEF2B2692054F00EFF1DF /* FidgetPhone */ = {
+			isa = PBXGroup;
+			children = (
+				ED8FEF2C2692054F00EFF1DF /* FidgetPhoneApp.swift */,
+				ED8FEF302692055100EFF1DF /* Assets.xcassets */,
+				ED8FEF322692055100EFF1DF /* Preview Content */,
+			);
+			path = FidgetPhone;
+			sourceTree = "<group>";
+		};
+		ED8FEF322692055100EFF1DF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				ED8FEF332692055100EFF1DF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ED8FEF3C2692055100EFF1DF /* FidgetPhoneTests */ = {
+			isa = PBXGroup;
+			children = (
+				ED8FEF3D2692055100EFF1DF /* FidgetPhoneTests.swift */,
+			);
+			path = FidgetPhoneTests;
+			sourceTree = "<group>";
+		};
+		ED8FEF462692055100EFF1DF /* FidgetPhoneUITests */ = {
+			isa = PBXGroup;
+			children = (
+				ED8FEF472692055100EFF1DF /* FidgetPhoneUITests.swift */,
+			);
+			path = FidgetPhoneUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,13 +370,66 @@
 			productReference = ED36A9942687B62000E1AF02 /* FidgetUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		ED8FEF292692054F00EFF1DF /* FidgetPhone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8FEF4F2692055100EFF1DF /* Build configuration list for PBXNativeTarget "FidgetPhone" */;
+			buildPhases = (
+				ED8FEF262692054F00EFF1DF /* Sources */,
+				ED8FEF272692054F00EFF1DF /* Frameworks */,
+				ED8FEF282692054F00EFF1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FidgetPhone;
+			productName = FidgetPhone;
+			productReference = ED8FEF2A2692054F00EFF1DF /* FidgetPhone.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ED8FEF382692055100EFF1DF /* FidgetPhoneTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8FEF502692055100EFF1DF /* Build configuration list for PBXNativeTarget "FidgetPhoneTests" */;
+			buildPhases = (
+				ED8FEF352692055100EFF1DF /* Sources */,
+				ED8FEF362692055100EFF1DF /* Frameworks */,
+				ED8FEF372692055100EFF1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED8FEF3B2692055100EFF1DF /* PBXTargetDependency */,
+			);
+			name = FidgetPhoneTests;
+			productName = FidgetPhoneTests;
+			productReference = ED8FEF392692055100EFF1DF /* FidgetPhoneTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ED8FEF422692055100EFF1DF /* FidgetPhoneUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED8FEF512692055100EFF1DF /* Build configuration list for PBXNativeTarget "FidgetPhoneUITests" */;
+			buildPhases = (
+				ED8FEF3F2692055100EFF1DF /* Sources */,
+				ED8FEF402692055100EFF1DF /* Frameworks */,
+				ED8FEF412692055100EFF1DF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ED8FEF452692055100EFF1DF /* PBXTargetDependency */,
+			);
+			name = FidgetPhoneUITests;
+			productName = FidgetPhoneUITests;
+			productReference = ED8FEF432692055100EFF1DF /* FidgetPhoneUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		ED36A95E2687B61D00E1AF02 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					ED36A9632687B61D00E1AF02 = {
@@ -306,6 +448,17 @@
 					ED36A9932687B62000E1AF02 = {
 						CreatedOnToolsVersion = 12.5.1;
 						TestTargetID = ED36A9672687B61D00E1AF02;
+					};
+					ED8FEF292692054F00EFF1DF = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					ED8FEF382692055100EFF1DF = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = ED8FEF292692054F00EFF1DF;
+					};
+					ED8FEF422692055100EFF1DF = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = ED8FEF292692054F00EFF1DF;
 					};
 				};
 			};
@@ -327,6 +480,9 @@
 				ED36A9732687B62000E1AF02 /* Fidget WatchKit Extension */,
 				ED36A9882687B62000E1AF02 /* FidgetTests */,
 				ED36A9932687B62000E1AF02 /* FidgetUITests */,
+				ED8FEF292692054F00EFF1DF /* FidgetPhone */,
+				ED8FEF382692055100EFF1DF /* FidgetPhoneTests */,
+				ED8FEF422692055100EFF1DF /* FidgetPhoneUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -370,6 +526,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED8FEF282692054F00EFF1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED8FEF342692055100EFF1DF /* Preview Assets.xcassets in Resources */,
+				ED8FEF312692055100EFF1DF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8FEF372692055100EFF1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8FEF412692055100EFF1DF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -399,6 +578,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ED8FEF262692054F00EFF1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED8FEF52269206B300EFF1DF /* ContentView.swift in Sources */,
+				ED8FEF2D2692054F00EFF1DF /* FidgetPhoneApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8FEF352692055100EFF1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED8FEF3E2692055100EFF1DF /* FidgetPhoneTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED8FEF3F2692055100EFF1DF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED8FEF482692055100EFF1DF /* FidgetPhoneUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -421,6 +625,16 @@
 			isa = PBXTargetDependency;
 			target = ED36A9672687B61D00E1AF02 /* Fidget WatchKit App */;
 			targetProxy = ED36A9952687B62000E1AF02 /* PBXContainerItemProxy */;
+		};
+		ED8FEF3B2692055100EFF1DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED8FEF292692054F00EFF1DF /* FidgetPhone */;
+			targetProxy = ED8FEF3A2692055100EFF1DF /* PBXContainerItemProxy */;
+		};
+		ED8FEF452692055100EFF1DF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED8FEF292692054F00EFF1DF /* FidgetPhone */;
+			targetProxy = ED8FEF442692055100EFF1DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -743,6 +957,164 @@
 			};
 			name = Release;
 		};
+		ED8FEF492692055100EFF1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FidgetPhone/Preview Content\"";
+				DEVELOPMENT_TEAM = C2UW47HS8X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetPhone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ED8FEF4A2692055100EFF1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FidgetPhone/Preview Content\"";
+				DEVELOPMENT_TEAM = C2UW47HS8X;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetPhone;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ED8FEF4B2692055100EFF1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C2UW47HS8X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetPhoneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FidgetPhone.app/FidgetPhone";
+			};
+			name = Debug;
+		};
+		ED8FEF4C2692055100EFF1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C2UW47HS8X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetPhoneTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FidgetPhone.app/FidgetPhone";
+			};
+			name = Release;
+		};
+		ED8FEF4D2692055100EFF1DF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C2UW47HS8X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetPhoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FidgetPhone;
+			};
+			name = Debug;
+		};
+		ED8FEF4E2692055100EFF1DF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = C2UW47HS8X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetPhoneUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FidgetPhone;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -796,6 +1168,33 @@
 			buildConfigurations = (
 				ED36A9AC2687B62000E1AF02 /* Debug */,
 				ED36A9AD2687B62000E1AF02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8FEF4F2692055100EFF1DF /* Build configuration list for PBXNativeTarget "FidgetPhone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8FEF492692055100EFF1DF /* Debug */,
+				ED8FEF4A2692055100EFF1DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8FEF502692055100EFF1DF /* Build configuration list for PBXNativeTarget "FidgetPhoneTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8FEF4B2692055100EFF1DF /* Debug */,
+				ED8FEF4C2692055100EFF1DF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED8FEF512692055100EFF1DF /* Build configuration list for PBXNativeTarget "FidgetPhoneUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED8FEF4D2692055100EFF1DF /* Debug */,
+				ED8FEF4E2692055100EFF1DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
