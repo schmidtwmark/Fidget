@@ -11,7 +11,7 @@ import SwiftUI
 struct FidgetPhoneApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(motion: MotionManager())
+            ContentView(motion: MotionManager(frame: UIScreen.main.bounds.size))
         }
     }
 }
