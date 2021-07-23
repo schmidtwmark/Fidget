@@ -15,9 +15,7 @@ typealias PositionVector = SIMD2<Double>;
 
 class MotionManager : ObservableObject {
     private var motionManager: CMMotionManager;
-    
     private let frame: CGSize;
-    
     private let collisionFactor = 0.8;
     private let gravityFactor = 5.0;
     private let frictionFactor = 0.01;
@@ -92,27 +90,62 @@ class MotionManager : ObservableObject {
     }
 }
 
-struct ContentView: View {
-    
+struct AccelerometerDebugView: View {
     @ObservedObject
     var motion: MotionManager
+    var body: some View {
+        VStack {
+            Text(String(format: "Player: (%.2f, %.2f)", motion.playerPosition.x, motion.playerPosition.y))
+            Text(String(format: "Velocity: (%.2f, %.2f)", motion.playerVelocity.x, motion.playerVelocity.y))
+            Text(String(format: "Acceleration: (%.2f, %.2f)", motion.gravitationalAcceleration.x, motion.gravitationalAcceleration.y))
+        }
+    }
+}
+
+
+struct AccelerometerView: View {
     
+    @StateObject
+    var motion: MotionManager
+
+    var playerColor: Color
+    var borderColor: Color
+    var debugView: AccelerometerDebugView?
+
+
+    init(frame: CGSize, playerColor: Color, borderColor: Color, showDebug: Bool) {
+        let motion = MotionManager(frame: frame)
+        _motion = StateObject(wrappedValue: motion)
+        self.debugView = showDebug ?  AccelerometerDebugView(motion: motion) : nil
+        self.playerColor = playerColor
+        self.borderColor = borderColor
+    }
+
     var body: some View {
         ZStack {
-            Text("🥺").position(x: motion.playerPosition.x, y: motion.playerPosition.y)
-            VStack {
-                Text(String(format: "Player: (%.2f, %.2f)", motion.playerPosition.x, motion.playerPosition.y))
-                Text(String(format: "Velocity: (%.2f, %.2f)", motion.playerVelocity.x, motion.playerVelocity.y))
-                Text(String(format: "Acceleration: (%.2f, %.2f)", motion.gravitationalAcceleration.x, motion.gravitationalAcceleration.y))
+            RoundedRectangle(cornerRadius: 8.0).stroke(lineWidth: 3.0).stroke(borderColor)
+            Circle().fill(playerColor).frame(width: 10.0, height: 10.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
+            if let debugView = self.debugView {
+                debugView
             }
-            
         }
-       
+    }
+}
+
+struct ContentView: View {
+    var accelView: AccelerometerView 
+
+    init(frame: CGSize) {
+        self.accelView = AccelerometerView(frame: frame, playerColor: Color.purple, borderColor: Color.purple, showDebug: true)
+    }
+    
+    var body: some View {
+        self.accelView
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(motion: MotionManager(frame: UIScreen.main.bounds.size))
+        ContentView(frame: UIScreen.main.bounds.size)
     }
 }
