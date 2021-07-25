@@ -7,11 +7,12 @@ typealias VelocityVector = SIMD2<Double>;
 typealias PositionVector = SIMD2<Double>;
 
 class MotionManager : ObservableObject {
-    private var motionManager: CMMotionManager;
-    private let frame: CGSize;
-    private let collisionFactor = 0.8;
-    private let gravityFactor = 5.0;
-    private let frictionFactor = 0.01;
+    private var motionManager: CMMotionManager
+    private var playHapticCallback: (Double) -> Void
+    private let frame: CGSize
+    private let collisionFactor = 0.8
+    private let gravityFactor = 5.0
+    private let frictionFactor = 0.01
     
     @Published
     var gravitationalAcceleration: AccelerationVector = SIMD2<Double>(0.0, 0.0)
@@ -24,23 +25,19 @@ class MotionManager : ObservableObject {
     
     func bounceX() {
         self.playerVelocity.x = -collisionFactor * self.playerVelocity.x
-        sendBump(velocity: abs(self.playerVelocity.x))
+        self.playHapticCallback(abs(self.playerVelocity.x))
     }
     
     func bounceY() {
         self.playerVelocity.y = -collisionFactor * self.playerVelocity.y
-        sendBump(velocity: abs(self.playerVelocity.y))
+        self.playHapticCallback(abs(self.playerVelocity.y))
     }
     
-    func sendBump(velocity: Double) {
-        let impactMed = UIImpactFeedbackGenerator(style: .heavy)
-        impactMed.impactOccurred(intensity: velocity / 10.0)
-    }
-    
-    init(frame: CGSize) {
+    init(frame: CGSize, playHaptic: @escaping (Double) -> Void) {
         self.frame = frame
         self.playerPosition = SIMD2<Double>(frame.width / 2.0, frame.height / 2.0)
         self.motionManager = CMMotionManager()
+        self.playHapticCallback = playHaptic
         self.motionManager.accelerometerUpdateInterval = 1/60
         self.motionManager.startAccelerometerUpdates(to: .main) { (accelerometerData, error) in
             guard error == nil else {
@@ -102,21 +99,18 @@ struct AccelerometerView: View {
     var motion: MotionManager
 
     var playerColor: Color
-    var borderColor: Color
     var debugView: AccelerometerDebugView?
 
 
-    init(frame: CGSize, playerColor: Color, borderColor: Color, showDebug: Bool) {
-        let motion = MotionManager(frame: frame)
+    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void, playerColor: Color, showDebug: Bool) {
+        let motion = MotionManager(frame: frame, playHaptic: hapticCallback)
         _motion = StateObject(wrappedValue: motion)
         self.debugView = showDebug ?  AccelerometerDebugView(motion: motion) : nil
         self.playerColor = playerColor
-        self.borderColor = borderColor
     }
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 8.0).stroke(lineWidth: 3.0).stroke(borderColor)
             Circle().fill(playerColor).frame(width: 10.0, height: 10.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
             if let debugView = self.debugView {
                 debugView

@@ -7,12 +7,16 @@
 
 import SwiftUI
 
+func watchHaptic(velocity: Double) {
+    WKInterfaceDevice.current().play(WKHapticType.click)
+}
+
 @main
 struct FidgetApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView(frame: UIScreen.main.bounds.size)
+                ContentView(frame: WKInterfaceDevice.current().screenBounds.size, hapticCallback: watchHaptic)
             }
         }
     }
