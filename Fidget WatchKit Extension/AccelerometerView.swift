@@ -98,20 +98,20 @@ struct AccelerometerView: View {
     @StateObject
     var motion: MotionManager
 
-    var playerColor: Color
+    @EnvironmentObject var settings: AppSettings 
+
     var debugView: AccelerometerDebugView?
 
 
-    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void, playerColor: Color, showDebug: Bool) {
+    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void, showDebug: Bool) {
         let motion = MotionManager(frame: frame, playHaptic: hapticCallback)
         _motion = StateObject(wrappedValue: motion)
         self.debugView = showDebug ?  AccelerometerDebugView(motion: motion) : nil
-        self.playerColor = playerColor
     }
 
     var body: some View {
         ZStack {
-            Circle().fill(playerColor).frame(width: 10.0, height: 10.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
+            Circle().fill(settings.color.rawColor).frame(width: 10.0, height: 10.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
             if let debugView = self.debugView {
                 debugView
             }

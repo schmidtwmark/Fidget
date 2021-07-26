@@ -9,28 +9,32 @@ import SwiftUI
 import Combine
 import CoreMotion
 
+let SHOW_DEBUG = true
 
 struct ContentView : View  {
     var accelView: AccelerometerView 
     var crownView: CrownView
     var buttonView: ButtonView
-
+    var settingsView: SettingsView
+    @StateObject var settings : AppSettings
 
 
     init(frame: CGSize, hapticCallback: @escaping (Double) -> Void ) {
-        let showDebug = true
-        accelView = AccelerometerView(frame: frame, hapticCallback: hapticCallback, playerColor: Color.purple, showDebug: showDebug)
-        crownView = CrownView(frame: frame, showDebug: true)
+        _settings = StateObject(wrappedValue: AppSettings())
+        accelView = AccelerometerView(frame: frame, hapticCallback: hapticCallback, showDebug: SHOW_DEBUG)
+        crownView = CrownView(frame: frame, showDebug: SHOW_DEBUG)
         buttonView = ButtonView(frame: frame, hapticCallback: hapticCallback)
-
+        settingsView = SettingsView()
     }
+    
     
     var body: some View {
         TabView {
             buttonView
             crownView
             accelView
-        }
+            settingsView
+        }.environmentObject(settings)
     }
 }
 

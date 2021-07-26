@@ -9,17 +9,21 @@ import SwiftUI
 import Combine
 
 struct HapticButtonStyle: ButtonStyle {
+  @EnvironmentObject var settings : AppSettings
+
   func makeBody(configuration: Self.Configuration) -> some View {
     configuration.label
       .padding()
-      .foregroundColor(.purple)
-      .background(configuration.isPressed ? Color.purple : Color.clear)
+      .foregroundColor(settings.color.rawColor)
+      .background(configuration.isPressed ? settings.color.rawColor: Color.clear)
       .animation(nil)
       .cornerRadius(8.0)
   }
 }
 
 struct ButtonView: View {
+
+    @EnvironmentObject var settings : AppSettings
     
     var hapticCallback: (Double) -> Void
 
@@ -33,6 +37,6 @@ struct ButtonView: View {
     var body: some View {
         Button("Press", action: {hapticCallback(0)})
             .buttonStyle(HapticButtonStyle())
-            .overlay(RoundedRectangle(cornerRadius: 8.0).stroke(Color.purple))
+            .overlay(RoundedRectangle(cornerRadius: 8.0).stroke(settings.color.rawColor))
     }
 }

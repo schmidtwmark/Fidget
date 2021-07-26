@@ -2,18 +2,6 @@ import WatchKit
 import SwiftUI
 import Combine
 
-class CrownManager : NSObject, ObservableObject, WKCrownDelegate{ 
-   @Published
-   var rotation: Double = 0.0
-
-   func crownDidRotate(_ crownSequencer: WKCrownSequencer?, rotationalDelta: Double) {
-       self.rotation += rotationalDelta
-       // TODO wraparound rotation
-       print("Got rotation delta \(rotationalDelta)")
-   }
-
-}
-
 struct Triangle : Shape {
     func path(in rect: CGRect) -> Path {
         let path = CGMutablePath()
@@ -31,26 +19,27 @@ struct CrownView: View{
 
     var debugView: Text? 
 
-    @StateObject
-    var crownManager: CrownManager
+    @EnvironmentObject var settings : AppSettings
+
+    @State var crownRotation = 0.0
 
     init(frame: CGSize, showDebug: Bool) {
         self.frame = frame
-        self._crownManager = StateObject(wrappedValue: CrownManager())
-        showDebug ? self.debugView = Text("Rotation: \(self.crownManager.rotation)") : nil
+        showDebug ? self.debugView = Text("Rotation: \(self.crownRotation)") : nil
+        
     }
 
     var body: some View {
         ZStack {
             Triangle()
                     .transform(CGAffineTransform(scaleX: 0.5, y: 0.5))
-                    .rotation(Angle(radians: self.crownManager.rotation))
-                    .stroke(Color.purple, lineWidth: 3)
+                    .rotation(Angle(radians: self.crownRotation))
+                    .stroke(settings.color.rawColor, lineWidth: 3)
                     .offset(x: self.frame.width / 4, y: self.frame.height / 4)
             if let debugView = self.debugView {
                 debugView
             }
-        }
+        }.digitalCrownRotation(self.$crownRotation)
        
     }
 }
