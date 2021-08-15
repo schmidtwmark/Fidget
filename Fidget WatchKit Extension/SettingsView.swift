@@ -34,6 +34,6 @@ struct SettingsView : View {
                 settings.color = settings.pickerColor 
                 
             })
-        }.navigationBarTitle("App Theme")
+        }
     }
 }

@@ -36,20 +36,6 @@ class AppSettings : ObservableObject {
 struct MSColor : Hashable{
     var rawColor: Color
     var key: String
-
-    static func == (lhs: MSColor, rhs: MSColor) -> Bool {
-        let ret = lhs.rawColor == rhs.rawColor && lhs.key == rhs.key
-        print("Comparing \(lhs.key) and \(rhs.key), matches: \(ret)")
-        return ret
-    }
-
-    func hash(into hasher: inout Hasher) {
-        
-        hasher.combine(key)
-//        hasher.combine(rawColor)
-        print("Hashing \(key), value is \(hasher.finalize())")
-//        print("Got value \(hasher)
-    }
 }
 
 let COLOR_KEY = "color"

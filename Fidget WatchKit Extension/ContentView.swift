@@ -19,10 +19,10 @@ struct ContentView : View  {
     @StateObject var settings : AppSettings
 
 
-    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void ) {
+    init(frame: CGSize, cornerRadius: Double, hapticCallback: @escaping (Double) -> Void ) {
         _settings = StateObject(wrappedValue: AppSettings())
-        accelView = AccelerometerView(frame: frame, hapticCallback: hapticCallback, showDebug: SHOW_DEBUG)
-        crownView = CrownView(frame: frame, showDebug: SHOW_DEBUG)
+        accelView = AccelerometerView(frame: frame, cornerRadius: cornerRadius, hapticCallback: hapticCallback, showDebug: SHOW_DEBUG)
+        crownView = CrownView(frame: frame)
         buttonView = ButtonView(frame: frame, hapticCallback: hapticCallback)
         settingsView = SettingsView()
     }
@@ -34,7 +34,7 @@ struct ContentView : View  {
             crownView
             accelView
             settingsView
-        }.environmentObject(settings)
+        }.environmentObject(settings).navigationBarHidden(true)
     }
 }
 
