@@ -8,35 +8,29 @@
 import SwiftUI
 import Combine
 
-struct HapticButtonStyle: ButtonStyle {
-  @EnvironmentObject var settings : AppSettings
 
-  func makeBody(configuration: Self.Configuration) -> some View {
-    configuration.label
-      .padding()
-      .foregroundColor(settings.color.rawColor)
-      .background(configuration.isPressed ? settings.color.rawColor: Color.clear)
-      .animation(nil)
-      .cornerRadius(8.0)
-  }
-}
 
 struct ButtonView: View {
 
     @EnvironmentObject var settings : AppSettings
     
     var hapticCallback: (Double) -> Void
+    var motion: MotionManager
 
-    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void) {
+    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void, motionManager: MotionManager) {
         self.hapticCallback = hapticCallback
+        self.motion = motionManager
     }
 
-    @State
-    var pressed : Bool = false;
-
     var body: some View {
-        Button("Press", action: {hapticCallback(0)})
-            .buttonStyle(HapticButtonStyle())
-            .overlay(RoundedRectangle(cornerRadius: 8.0).stroke(settings.color.rawColor))
+        Button(action: {hapticCallback(0.0)}){
+            Text("Press")
+        }.onTouchDownGesture {
+            hapticCallback(0.0)
+        }.buttonStyle(MSButtonStyle())
+            .onAppear(perform: {
+                motion.stopUpdates()
+            })
+       
     }
 }

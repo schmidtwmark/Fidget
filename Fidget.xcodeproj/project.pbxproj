@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED0F4FFE26E67A9A008ABA66 /* MSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */; };
+		ED28234226E3A2E9006462E4 /* BreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28234126E3A2E9006462E4 /* BreathingView.swift */; };
 		ED36A9692687B61E00E1AF02 /* Fidget WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ED36A96E2687B62000E1AF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED36A96D2687B62000E1AF02 /* Assets.xcassets */; };
 		ED36A9752687B62000E1AF02 /* Fidget WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -81,6 +83,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSButton.swift; sourceTree = "<group>"; };
+		ED28234126E3A2E9006462E4 /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
 		ED36A9642687B61D00E1AF02 /* Fidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fidget WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A96D2687B62000E1AF02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		ED36A95D2687B61D00E1AF02 = {
 			isa = PBXGroup;
 			children = (
+				ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */,
 				ED36A96C2687B61E00E1AF02 /* Fidget WatchKit App */,
 				ED36A9782687B62000E1AF02 /* Fidget WatchKit Extension */,
 				ED36A98C2687B62000E1AF02 /* FidgetTests */,
@@ -166,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				ED8B77D126AB8FD000E60027 /* AccelerometerView.swift */,
+				ED28234126E3A2E9006462E4 /* BreathingView.swift */,
 				ED5C29FC26ACB3EC0073E55A /* ButtonView.swift */,
 				ED5C29FE26ACEFD50073E55A /* SettingsView.swift */,
 				ED5C2A0026AD86A10073E55A /* DataModel.swift */,
@@ -394,6 +400,8 @@
 			files = (
 				ED5C29FF26ACEFD60073E55A /* SettingsView.swift in Sources */,
 				ED8B77D226AB8FD000E60027 /* AccelerometerView.swift in Sources */,
+				ED28234226E3A2E9006462E4 /* BreathingView.swift in Sources */,
+				ED0F4FFE26E67A9A008ABA66 /* MSButton.swift in Sources */,
 				ED36A97C2687B62000E1AF02 /* FidgetApp.swift in Sources */,
 				ED5C29FD26ACB3EC0073E55A /* ButtonView.swift in Sources */,
 				ED36A97A2687B62000E1AF02 /* ContentView.swift in Sources */,

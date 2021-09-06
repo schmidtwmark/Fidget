@@ -14,6 +14,7 @@ class MotionManager : ObservableObject {
     private let gravityFactor = 5.0
     private let frictionFactor = 0.01
     private let cornerRadius: Double
+    private var run: Bool = false
     
     @Published
     var gravitationalAcceleration: AccelerationVector = SIMD2<Double>(0.0, 0.0)
@@ -35,6 +36,7 @@ class MotionManager : ObservableObject {
     }
     
     func stopUpdates() {
+        self.run = false
         self.motionManager.stopAccelerometerUpdates()
     }
     
@@ -52,8 +54,8 @@ class MotionManager : ObservableObject {
         
         if px * px + py * py > radiusSquared {
             // Out of bounds
-            var lastX = lastX - offset.width
-            var lastY = lastY - offset.height
+            let lastX = lastX - offset.width
+            let lastY = lastY - offset.height
             
             var newX = (lastX + px) / 2.0
             var newY = (lastY + py) / 2.0
@@ -74,15 +76,20 @@ class MotionManager : ObservableObject {
     }
     
     func initUpdates() {
+        self.run = true
         self.motionManager.startAccelerometerUpdates(to: .main) { (accelerometerData, error) in
             guard error == nil else {
                 print(error!)
                 return
             }
             
+            guard self.run else {
+                return
+            }
+            
             if let accelData = accelerometerData {
-                var lastX = self.playerPosition.x
-                var lastY = self.playerPosition.y
+                let lastX = self.playerPosition.x
+                let lastY = self.playerPosition.y
                 self.gravitationalAcceleration = SIMD2<Double>(accelData.acceleration.x, -accelData.acceleration.y);
                 self.playerVelocity += self.gravityFactor * self.gravitationalAcceleration;
                 self.playerVelocity -= self.playerVelocity * self.frictionFactor
@@ -171,11 +178,10 @@ struct AccelerometerView: View {
     var frame: CGSize
     var cornerRadius: Double
 
-    init(frame: CGSize, cornerRadius: Double, hapticCallback: @escaping (Double) -> Void, showDebug: Bool) {
+    init(frame: CGSize, cornerRadius: Double, hapticCallback: @escaping (Double) -> Void, motionManager: MotionManager, showDebug: Bool ) {
         self.frame = frame
         self.cornerRadius = cornerRadius
-        let motion = MotionManager(frame: CGSize(width: frame.width, height: frame.height), cornerRadius: cornerRadius, playHaptic: hapticCallback)
-        _motion = StateObject(wrappedValue: motion)
+        _motion = StateObject(wrappedValue: motionManager)
         self.debugView = showDebug ?  AccelerometerDebugView(motion: motion) : nil
     }
     
@@ -191,11 +197,9 @@ struct AccelerometerView: View {
                 .strokeBorder(settings.color.rawColor, lineWidth: 3)
                 .frame(width: self.frame.width, height: self.frame.height)
         }.onAppear {
+            print("Accelerometer appearing")
             motion.resetPlayer()
             motion.initUpdates()
-        }
-        .onDisappear {
-            motion.stopUpdates()
         }
     }
 }

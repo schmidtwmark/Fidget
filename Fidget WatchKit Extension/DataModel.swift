@@ -23,11 +23,19 @@ class AppSettings : ObservableObject {
             print("Set picker color to \(pickerColor.key)")
         }
     }
+    
+    @Published
+    var paid : Bool {
+        didSet {
+            save(paid: paid)
+        }
+    }
 
     init() {
         let color = loadColor()
         self.color = color
         self.pickerColor = color
+        self.paid = loadPaid()
         print("Done init")
     }
 
@@ -46,6 +54,11 @@ func save(color: MSColor) {
     UserDefaults.standard.set(color.key, forKey: COLOR_KEY)
 }
 
+func save(paid: Bool) {
+    print("Saving \(paid)")
+    UserDefaults.standard.set(paid, forKey: PAID_KEY)
+}
+
 func loadColor() -> MSColor  {
     if let savedColorString = UserDefaults.standard.string(forKey: COLOR_KEY) {
         print("Loaded \(savedColorString)")
@@ -59,4 +72,8 @@ func loadColor() -> MSColor  {
         print("Attempted to load and failed, returning purple")
         return MSColor(rawColor: Color.purple, key: "Purple")
     }
+}
+
+func loadPaid() -> Bool{
+    return UserDefaults.standard.bool(forKey: PAID_KEY)
 }
