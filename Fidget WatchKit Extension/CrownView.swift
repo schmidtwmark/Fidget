@@ -24,15 +24,13 @@ struct Triangle : Shape {
 
 struct CrownView: View{
     var frame: CGSize
-    var motion: MotionManager
 
     @EnvironmentObject var settings : AppSettings
 
     @State var crownRotation = 0.0
 
-    init(frame: CGSize, motionManager: MotionManager) {
+    init(frame: CGSize) {
         self.frame = frame
-        self.motion = motionManager
     }
 
     var body: some View {
@@ -40,9 +38,7 @@ struct CrownView: View{
             Triangle()
                 .stroke(settings.color.rawColor, lineWidth: 3)
                 .rotationEffect(.degrees(crownRotation), anchor: .center)
-        }.focusable().digitalCrownRotation($crownRotation, from: 0.0, through: 360.0, by: 10.0, sensitivity: .high, isContinuous: true).onAppear(perform: {
-            motion.stopUpdates()
-        })
+        }.focusable().digitalCrownRotation($crownRotation, from: 0.0, through: 360.0, by: 10.0, sensitivity: .high, isContinuous: true)
        
     }
 }

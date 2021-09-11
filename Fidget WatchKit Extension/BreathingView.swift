@@ -25,7 +25,6 @@ struct BreatheIcon: View {
 struct BreatheView: View{
     var frame: CGSize
     var hapticCallback: (Double) -> Void
-    var motion: MotionManager
     
     
     @State var isRunning: Date? = nil
@@ -36,10 +35,9 @@ struct BreatheView: View{
     
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
 
-    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void, motionManager: MotionManager) {
+    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void) {
         self.hapticCallback = hapticCallback
         self.frame = frame
-        self.motion = motionManager
     }
     
     let statements = ["Inhale", "Hold", "Exhale", "Hold"]
@@ -47,8 +45,14 @@ struct BreatheView: View{
     func getStatement() -> String {
         if let startTime = isRunning {
             var interval = -startTime.timeIntervalSinceNow
-            if(interval < 4.0) {
-                return "Get Ready"
+            if(interval < 1.0) {
+                return "Get Ready 4"
+            } else if(interval < 2.0) {
+                return "Get Ready 3"
+            } else if(interval < 3.0) {
+                return "Get Ready 2"
+            } else if(interval < 4.0) {
+                return "Get Ready 1"
             } else {
                 interval = interval - 4.0
                 let index = Int(exactly: (interval / 4.0).rounded(.towardZero))
@@ -64,11 +68,14 @@ struct BreatheView: View{
         VStack {
             Text(self.message).foregroundColor(settings.color.rawColor)
             Spacer()
+            
             BreatheIcon()
-                .rotationEffect(Angle(degrees: isRunning != nil ? 315.0 : 0.0))
-                .scaleEffect(isRunning != nil ? 3.0 : 1.0, anchor: .center)
-                .animation(isRunning != nil ? Animation.easeInOut(duration: 4.0).delay(4.0).repeatForever() : Animation.default)
-            Spacer()
+                    .rotationEffect(Angle(degrees: isRunning != nil ? 315.0 : 0.0))
+                    .scaleEffect(isRunning != nil ? 3.0 : 1.0, anchor: .center)
+                    .animation(isRunning != nil ? Animation.easeInOut(duration: 4.0)
+                                .delay(4.0)
+                                .repeatForever() : Animation.default, value: isRunning)
+                Spacer()
             Button(action: {
                 isRunning = nil
             }) {
@@ -85,8 +92,6 @@ struct BreatheView: View{
             if(self.message != oldMessage) {
                 self.hapticCallback(0.0)
             }
-        }.onAppear(perform: {
-            motion.stopUpdates()
-        })
+        }
     }
 }

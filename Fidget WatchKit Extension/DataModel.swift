@@ -60,6 +60,10 @@ func save(paid: Bool) {
 }
 
 func loadColor() -> MSColor  {
+    if !loadPaid() {
+        print("Has not paid or failed to auth, returning purple")
+        return MSColor(rawColor: Color.purple, key: "Purple")
+    }
     if let savedColorString = UserDefaults.standard.string(forKey: COLOR_KEY) {
         print("Loaded \(savedColorString)")
         let color = MSColor(rawColor: Color(savedColorString), key: savedColorString)

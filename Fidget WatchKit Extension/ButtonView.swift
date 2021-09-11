@@ -15,11 +15,9 @@ struct ButtonView: View {
     @EnvironmentObject var settings : AppSettings
     
     var hapticCallback: (Double) -> Void
-    var motion: MotionManager
 
-    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void, motionManager: MotionManager) {
+    init(frame: CGSize, hapticCallback: @escaping (Double) -> Void) {
         self.hapticCallback = hapticCallback
-        self.motion = motionManager
     }
 
     var body: some View {
@@ -28,9 +26,6 @@ struct ButtonView: View {
         }.onTouchDownGesture {
             hapticCallback(0.0)
         }.buttonStyle(MSButtonStyle())
-            .onAppear(perform: {
-                motion.stopUpdates()
-            })
        
     }
 }

@@ -196,10 +196,6 @@ struct AccelerometerView: View {
             RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                 .strokeBorder(settings.color.rawColor, lineWidth: 3)
                 .frame(width: self.frame.width, height: self.frame.height)
-        }.onAppear {
-            print("Accelerometer appearing")
-            motion.resetPlayer()
-            motion.initUpdates()
         }
     }
 }

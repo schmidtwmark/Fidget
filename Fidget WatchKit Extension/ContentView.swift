@@ -11,44 +11,58 @@ import CoreMotion
 
 let SHOW_DEBUG = false
 
+final class TabViewManager: ObservableObject {
+    @Published var selection: Int = 0 {
+        didSet {
+            if selection == 2 {
+                motion.resetPlayer()
+                motion.initUpdates()
+            } else {
+                motion.stopUpdates()
+                motion.resetPlayer()
+            }
+        }
+    }
+    
+    var motion: MotionManager
+    init(motion: MotionManager) {
+        self.motion = motion
+        
+    }
+}
+
 struct ContentView : View  {
     var accelView: AccelerometerView 
     var crownView: CrownView
     var buttonView: ButtonView
     var settingsView: SettingsView
     var breatheView: BreatheView
-    @State var selection: Int = 0
-//    @State var selection: Int {
-//        get {
-//            return self.selection
-//        }
-//        set(newSelection) {
-//            print("Selecting! Current: \(self.selection) New: \(newSelection)")
-//            self.selection = newSelection
-//        }
-//    }
-    @StateObject var settings : AppSettings
+    
+    @ObservedObject var tabViewManager: TabViewManager
+    
+    @StateObject var settings : AppSettings = AppSettings()
+    @StateObject var store: Store = Store()
 
 
     init(frame: CGSize, cornerRadius: Double, hapticCallback: @escaping (Double) -> Void ) {
-        _settings = StateObject(wrappedValue: AppSettings())
         let motion = MotionManager(frame: CGSize(width: frame.width, height: frame.height), cornerRadius: cornerRadius, playHaptic: hapticCallback)
+        tabViewManager = TabViewManager(motion: motion)
         accelView = AccelerometerView(frame: frame, cornerRadius: cornerRadius, hapticCallback: hapticCallback, motionManager: motion, showDebug: SHOW_DEBUG)
-        crownView = CrownView(frame: frame, motionManager: motion)
-        buttonView = ButtonView(frame: frame, hapticCallback: hapticCallback, motionManager: motion)
-        breatheView = BreatheView(frame: frame, hapticCallback: hapticCallback, motionManager: motion)
-        settingsView = SettingsView(motionManager: motion)
+        crownView = CrownView(frame: frame)
+        buttonView = ButtonView(frame: frame, hapticCallback: hapticCallback)
+        breatheView = BreatheView(frame: frame, hapticCallback: hapticCallback)
+        settingsView = SettingsView()
     }
     
     
     var body: some View {
-        TabView(selection: $selection) {
-            breatheView
-            accelView
-            buttonView
-            crownView
-            settingsView
-        }.environmentObject(settings).navigationBarHidden(true)
+        TabView(selection: $tabViewManager.selection) {
+            breatheView.tag(1)
+//            accelView.tag(2)
+//            buttonView.tag(3)
+//            crownView.tag(4)
+            settingsView.tag(5)
+        }.environmentObject(settings).environmentObject(store).navigationBarHidden(true)
     }
 }
 

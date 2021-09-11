@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED0F4FFE26E67A9A008ABA66 /* MSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */; };
+		ED0F505E26ED143E008ABA66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0F505D26ED143E008ABA66 /* Store.swift */; };
 		ED28234226E3A2E9006462E4 /* BreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28234126E3A2E9006462E4 /* BreathingView.swift */; };
 		ED36A9692687B61E00E1AF02 /* Fidget WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ED36A96E2687B62000E1AF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED36A96D2687B62000E1AF02 /* Assets.xcassets */; };
@@ -84,6 +85,9 @@
 
 /* Begin PBXFileReference section */
 		ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSButton.swift; sourceTree = "<group>"; };
+		ED0F505A26ED13E8008ABA66 /* Products.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Products.storekit; sourceTree = "<group>"; };
+		ED0F505D26ED143E008ABA66 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		ED0F506026ED1F75008ABA66 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.0.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		ED28234126E3A2E9006462E4 /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
 		ED36A9642687B61D00E1AF02 /* Fidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fidget WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,15 +138,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED0F505F26ED1F74008ABA66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED0F506026ED1F75008ABA66 /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ED36A95D2687B61D00E1AF02 = {
 			isa = PBXGroup;
 			children = (
-				ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */,
 				ED36A96C2687B61E00E1AF02 /* Fidget WatchKit App */,
 				ED36A9782687B62000E1AF02 /* Fidget WatchKit Extension */,
 				ED36A98C2687B62000E1AF02 /* FidgetTests */,
 				ED36A9972687B62000E1AF02 /* FidgetUITests */,
 				ED36A9652687B61D00E1AF02 /* Products */,
+				ED0F505F26ED1F74008ABA66 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -170,10 +182,13 @@
 		ED36A9782687B62000E1AF02 /* Fidget WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				ED0F505D26ED143E008ABA66 /* Store.swift */,
 				ED8B77D126AB8FD000E60027 /* AccelerometerView.swift */,
 				ED28234126E3A2E9006462E4 /* BreathingView.swift */,
 				ED5C29FC26ACB3EC0073E55A /* ButtonView.swift */,
 				ED5C29FE26ACEFD50073E55A /* SettingsView.swift */,
+				ED0F4FFD26E67A9A008ABA66 /* MSButton.swift */,
+				ED0F505A26ED13E8008ABA66 /* Products.storekit */,
 				ED5C2A0026AD86A10073E55A /* DataModel.swift */,
 				ED8B77D426AC9C1A00E60027 /* CrownView.swift */,
 				ED36A9792687B62000E1AF02 /* ContentView.swift */,
@@ -401,6 +416,7 @@
 				ED5C29FF26ACEFD60073E55A /* SettingsView.swift in Sources */,
 				ED8B77D226AB8FD000E60027 /* AccelerometerView.swift in Sources */,
 				ED28234226E3A2E9006462E4 /* BreathingView.swift in Sources */,
+				ED0F505E26ED143E008ABA66 /* Store.swift in Sources */,
 				ED0F4FFE26E67A9A008ABA66 /* MSButton.swift in Sources */,
 				ED36A97C2687B62000E1AF02 /* FidgetApp.swift in Sources */,
 				ED5C29FD26ACB3EC0073E55A /* ButtonView.swift in Sources */,
@@ -589,7 +605,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Debug;
 		};
@@ -613,7 +629,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.5;
+				WATCHOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
