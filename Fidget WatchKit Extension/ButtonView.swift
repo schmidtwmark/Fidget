@@ -14,6 +14,7 @@ struct ButtonView: View {
 
     @EnvironmentObject var settings : AppSettings
     
+    @State var isPressed = false
     var hapticCallback: (Double) -> Void
 
     init(frame: CGSize, hapticCallback: @escaping (Double) -> Void) {
@@ -21,11 +22,23 @@ struct ButtonView: View {
     }
 
     var body: some View {
-        Button(action: {hapticCallback(0.0)}){
-            Text("Press")
-        }.onTouchDownGesture {
-            hapticCallback(0.0)
-        }.buttonStyle(MSButtonStyle())
+        ZStack {
+            Button(action: {
+                isPressed = false
+                hapticCallback(0.0)
+                
+            }){
+                Text("Press")
+            }.onTouchDownGesture {
+                hapticCallback(0.0)
+                isPressed = true
+            }.buttonStyle(MSButtonStyle())
+            Circle().fill(settings.color.rawColor)
+                .frame(width: 100.0,  height: 100.0)
+                .scaleEffect(isPressed ? 5.0 : 0.0, anchor: .center)
+                .animation(isPressed ? Animation.easeInOut(duration: 1.5) : Animation.default, value: isPressed)
+                .opacity(isPressed ? 0.7 : 0.1)
+            }
        
     }
 }

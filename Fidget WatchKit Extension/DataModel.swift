@@ -18,13 +18,6 @@ class AppSettings : ObservableObject {
     }
 
     @Published
-    var pickerColor: MSColor {
-        didSet {
-            print("Set picker color to \(pickerColor.key)")
-        }
-    }
-    
-    @Published
     var paid : Bool {
         didSet {
             save(paid: paid)
@@ -34,7 +27,6 @@ class AppSettings : ObservableObject {
     init() {
         let color = loadColor()
         self.color = color
-        self.pickerColor = color
         self.paid = loadPaid()
         print("Done init")
     }
@@ -42,8 +34,8 @@ class AppSettings : ObservableObject {
 }
 
 struct MSColor : Hashable{
-    var rawColor: Color
-    var key: String
+    var rawColor: Color = Color.purple
+    var key: String = "Purple"
 }
 
 let COLOR_KEY = "color"
@@ -62,19 +54,19 @@ func save(paid: Bool) {
 func loadColor() -> MSColor  {
     if !loadPaid() {
         print("Has not paid or failed to auth, returning purple")
-        return MSColor(rawColor: Color.purple, key: "Purple")
+        return MSColor()
     }
     if let savedColorString = UserDefaults.standard.string(forKey: COLOR_KEY) {
         print("Loaded \(savedColorString)")
         let color = MSColor(rawColor: Color(savedColorString), key: savedColorString)
         if color.rawColor == Color.clear {
             print("Returning default")
-            return MSColor(rawColor: Color.purple, key: "Purple")
+            return MSColor()
         }
         return color
     } else {
         print("Attempted to load and failed, returning purple")
-        return MSColor(rawColor: Color.purple, key: "Purple")
+        return MSColor()
     }
 }
 

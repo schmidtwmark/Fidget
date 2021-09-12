@@ -71,7 +71,7 @@ struct BreatheView: View{
             
             BreatheIcon()
                     .rotationEffect(Angle(degrees: isRunning != nil ? 315.0 : 0.0))
-                    .scaleEffect(isRunning != nil ? 3.0 : 1.0, anchor: .center)
+                    .scaleEffect(isRunning != nil ? 2.75 : 1.0, anchor: .center)
                     .animation(isRunning != nil ? Animation.easeInOut(duration: 4.0)
                                 .delay(4.0)
                                 .repeatForever() : Animation.default, value: isRunning)

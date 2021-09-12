@@ -9,7 +9,41 @@ import SwiftUI
 import Combine
 import CoreMotion
 
-let SHOW_DEBUG = false
+let SHOW_DEBUG = true
+
+struct Frame {
+    var top : Double = 0.0
+    var bottom : Double
+    var left : Double = 0.0
+    var right : Double
+    var cornerRadius : Double = 0.0
+    
+    var width : Double {
+        get {
+            return right - left
+            
+        }
+    }
+    var height : Double {
+        get {
+            return bottom - top
+            
+        }
+        
+        
+    }
+    var size: CGSize {
+        get {
+            return CGSize(width: self.width, height: self.height)
+        }
+    }
+    
+    var hideNavBar: Bool {
+        get {
+            return cornerRadius != 0.0
+        }
+    }
+}
 
 final class TabViewManager: ObservableObject {
     @Published var selection: Int = 0 {
@@ -37,20 +71,21 @@ struct ContentView : View  {
     var buttonView: ButtonView
     var settingsView: SettingsView
     var breatheView: BreatheView
+    var frame: Frame
     
     @ObservedObject var tabViewManager: TabViewManager
     
     @StateObject var settings : AppSettings = AppSettings()
     @StateObject var store: Store = Store()
 
-
-    init(frame: CGSize, cornerRadius: Double, hapticCallback: @escaping (Double) -> Void ) {
-        let motion = MotionManager(frame: CGSize(width: frame.width, height: frame.height), cornerRadius: cornerRadius, playHaptic: hapticCallback)
+    init(frame: Frame, hapticCallback: @escaping (Double) -> Void ) {
+        self.frame = frame
+        let motion = MotionManager(frame: frame, playHaptic: hapticCallback)
         tabViewManager = TabViewManager(motion: motion)
-        accelView = AccelerometerView(frame: frame, cornerRadius: cornerRadius, hapticCallback: hapticCallback, motionManager: motion, showDebug: SHOW_DEBUG)
-        crownView = CrownView(frame: frame)
-        buttonView = ButtonView(frame: frame, hapticCallback: hapticCallback)
-        breatheView = BreatheView(frame: frame, hapticCallback: hapticCallback)
+        accelView = AccelerometerView(frame: frame, hapticCallback: hapticCallback, motionManager: motion, showDebug: SHOW_DEBUG)
+        crownView = CrownView(frame: frame.size)
+        buttonView = ButtonView(frame: frame.size, hapticCallback: hapticCallback)
+        breatheView = BreatheView(frame: frame.size, hapticCallback: hapticCallback)
         settingsView = SettingsView()
     }
     
@@ -58,11 +93,11 @@ struct ContentView : View  {
     var body: some View {
         TabView(selection: $tabViewManager.selection) {
             breatheView.tag(1)
-//            accelView.tag(2)
-//            buttonView.tag(3)
-//            crownView.tag(4)
+            accelView.tag(2)
+            buttonView.tag(3)
+            crownView.tag(4)
             settingsView.tag(5)
-        }.environmentObject(settings).environmentObject(store).navigationBarHidden(true)
+        }.environmentObject(settings).environmentObject(store).navigationBarHidden(frame.hideNavBar)
     }
 }
 

@@ -11,13 +11,16 @@ import Combine
 import StoreKit
 
 struct ColorPickerView : View {
+    
+    @State var selection : MSColor
     @EnvironmentObject var settings : AppSettings
+    
     func getViewFor(color: MSColor) -> some View{
         return Text(color.key).tag(color).foregroundColor(color.rawColor)
     }
     var body : some View {
         VStack {
-            Picker("App Color Theme", selection: $settings.pickerColor) {
+            Picker("App Color Theme", selection: $selection) {
                 getViewFor(color: MSColor(rawColor: Color("Purple"), key: "Purple"))
                 getViewFor(color: MSColor(rawColor: Color("Blue"), key: "Blue"))
                 getViewFor(color: MSColor(rawColor: Color("Green"), key: "Green"))
@@ -30,7 +33,7 @@ struct ColorPickerView : View {
             }
             Button("Confirm", action: {
                 print("Saving color")
-                settings.color = settings.pickerColor
+                settings.color = selection
                 
             })
         }
@@ -93,7 +96,7 @@ struct SettingsView : View {
 
     var body : some View {
         if settings.paid {
-            ColorPickerView()
+            ColorPickerView(selection: settings.color)
         } else {
             PurchaseView()
         }
