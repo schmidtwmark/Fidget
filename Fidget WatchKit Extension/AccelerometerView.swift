@@ -183,17 +183,17 @@ struct AccelerometerView: View {
 
     @EnvironmentObject var settings: AppSettings 
 
-    var debugView: AccelerometerDebugView?
+    var showDebug: Bool
     var frame: Frame
 
-    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect() // TODO disable before shipping
 
     init(frame: Frame, hapticCallback: @escaping (Double) -> Void, motionManager: MotionManager, showDebug: Bool ) {
         self.frame = frame
         print("Got frame \(self.frame)")
         print("Should hide nav bar \(frame.hideNavBar)")
         _motion = StateObject(wrappedValue: motionManager)
-        self.debugView = showDebug ?  AccelerometerDebugView(motion: motion) : nil
+        self.showDebug = showDebug
     }
     
     
@@ -201,18 +201,19 @@ struct AccelerometerView: View {
     var body: some View {
         ZStack {
             Circle().fill(settings.color.rawColor).frame(width: 20.0, height: 20.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
-            if let debugView = self.debugView {
-                debugView
+            if self.showDebug {
+                AccelerometerDebugView(motion: motion)
             }
             RoundedRectangle(cornerRadius: self.frame.cornerRadius, style: .continuous)
-                .strokeBorder(settings.color.rawColor, lineWidth: 3)
+                .strokeBorder(settings.color.rawColor, lineWidth: 4)
                 .frame(width: self.frame.width, height: self.frame.height)
                 .position(x: self.frame.left + (self.frame.width / 2.0), y: self.frame.top + (self.frame.height / 2.0))
-        }
+        }.background(Color.gray)
 //         TO ENABLE DEBUG STUFF
-        .onReceive(timer) {
-            input in
-            self.motion.tick()
-        }
+            // TODO DISABLE BEFORE SHIPPING
+//        .onReceive(timer) {
+//            input in
+//            self.motion.tick()
+//        }
     }
 }

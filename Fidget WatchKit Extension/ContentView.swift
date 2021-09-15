@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import CoreMotion
 
-let SHOW_DEBUG = true
+let SHOW_DEBUG = false
 
 struct Frame {
     var top : Double = 0.0
