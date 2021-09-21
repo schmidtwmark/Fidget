@@ -8,6 +8,7 @@
 import SwiftUI
 
 func watchHaptic(velocity: Double) {
+//    print("Playing haptic, velocity is \(velocity)")
     WKInterfaceDevice.current().play(WKHapticType.click)
 }
 

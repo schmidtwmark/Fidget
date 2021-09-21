@@ -78,7 +78,6 @@ struct PurchaseView : View {
                         //This call displays a system prompt that asks users to authenticate with their App Store credentials.
                         //Call this function only in response to an explicit user action, such as tapping a button.
                         try? await AppStore.sync()
-                        settings.paid = await store.checkIsPurchased(premiumId)
                     }
                 })
             }
@@ -86,8 +85,29 @@ struct PurchaseView : View {
         .alert(isPresented: $isShowingError, content: {
             Alert(title: Text(errorTitle), message: nil, dismissButton: .default(Text("Okay")))
         })
+        .onAppear {
+            Task {
+                //When this view appears, get all the purchased products to display.
+                print("Checking is purchased")
+                settings.paid = await checkIsPurchased(premiumId)
+                print("Done checking is purchased")
+            }
+        }
     }
     
+    @MainActor
+    fileprivate func checkIsPurchased(_ productIdentifier: String) async -> Bool {
+        for await result in Transaction.currentEntitlements{
+            print("Checking current entitlements \(result)")
+            if let transaction = try? store.checkVerified(result) {
+                if transaction.productID == productIdentifier {
+                    return true
+                }
+            }
+        }
+        return false
+        
+    }
 }
 
 struct SettingsView : View {

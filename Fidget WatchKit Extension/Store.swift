@@ -125,28 +125,17 @@ class Store: ObservableObject {
         return transaction.revocationDate == nil && !transaction.isUpgraded
     }
     
-    func checkIsPurchased(_ productIdentifier: String) async -> Bool {
-        for await result in Transaction.all{
-            print("Checking current entitlements \(result)")
-            if let transaction = try? checkVerified(result) {
-                if transaction.productID == productIdentifier {
-                    return true
-                }
-            }
-        }
-        return false
-        
-    }
+ 
 
     func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         //Check if the transaction passes StoreKit verification.
         switch result {
-        case .unverified(let safe, let error):
+        case .unverified(_, let error):
             //StoreKit has parsed the JWS but failed verification. Don't deliver content to the user.
-            if error == VerificationResult.VerificationError.missingRequiredProperties {
-                print("Missing required properties but allowing anyways. Maybe this is a testing thing")
-                return safe
-            }
+//            if error == VerificationResult.VerificationError.missingRequiredProperties {
+//                print("Missing required properties but allowing anyways. Maybe this is a testing thing")
+//                return safe
+//            }
             print("Unverified result: \(error)")
             throw StoreError.failedVerification
         case .verified(let safe):

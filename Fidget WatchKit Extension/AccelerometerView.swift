@@ -11,7 +11,7 @@ class MotionManager : ObservableObject {
     private var playHapticCallback: (Double) -> Void
     private let frame: Frame
     private let collisionFactor = 0.8
-    private let gravityFactor = 5.0
+    private let gravityFactor = 10.0
 //    private let frictionFactor = 0.01
     private let frictionFactor = 0.00
     private var run: Bool = false
@@ -186,14 +186,13 @@ struct AccelerometerView: View {
     var showDebug: Bool
     var frame: Frame
 
-    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect() // TODO disable before shipping
+//    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect() // TODO disable before shipping
 
     init(frame: Frame, hapticCallback: @escaping (Double) -> Void, motionManager: MotionManager, showDebug: Bool ) {
         self.frame = frame
-        print("Got frame \(self.frame)")
-        print("Should hide nav bar \(frame.hideNavBar)")
         _motion = StateObject(wrappedValue: motionManager)
         self.showDebug = showDebug
+        self.motion.initUpdates()
     }
     
     
@@ -208,7 +207,8 @@ struct AccelerometerView: View {
                 .strokeBorder(settings.color.rawColor, lineWidth: 4)
                 .frame(width: self.frame.width, height: self.frame.height)
                 .position(x: self.frame.left + (self.frame.width / 2.0), y: self.frame.top + (self.frame.height / 2.0))
-        }.background(Color.gray)
+        }
+//        }.background(Color.gray)
 //         TO ENABLE DEBUG STUFF
             // TODO DISABLE BEFORE SHIPPING
 //        .onReceive(timer) {
