@@ -52,27 +52,27 @@ struct PurchaseView : View {
             VStack(spacing: 10) {
                 Text("Fidget Premium").foregroundColor(Color.purple)
                 Text("Fidget Premium includes:\n - App theming\n - Any future updates\n - Supporting an independent developer").font(.system(size: 12.0))
-                ForEach(store.products, id: \.id) {
-                    product in
-                    Button("Buy $0.99", action : {
-                        Task {
-                            do {
-                                if try await store.purchase(product) != nil {
-                                    print("Successful payment")
-                                    settings.paid = true
-                                }
-                            } catch StoreError.failedVerification {
-                                print("Failed verification")
-                                errorTitle = "Your purchase could not be verified by the App Store."
-                                isShowingError = true
-                            } catch {
-                                print("Failed purchase for \(product.id): \(error)")
+                Button("Buy $0.99", action : {
+                    Task {
+                        do {
+                            if try await store.purchasePremium() != nil {
+                                print("Successful payment")
+                                settings.paid = true
                             }
-                                
+                        } catch StoreError.failedVerification {
+                            print("Failed verification")
+                            errorTitle = "Your purchase could not be verified by the App Store."
+                            isShowingError = true
+                        } catch StoreError.missingProduct {
+                            print("Failed purchase")
+                            errorTitle = "Your purchase could not be completed."
+                            isShowingError = true
+                        } catch {
+                            print("Failed purchase for \(premiumId): \(error)")
                         }
-                    }).buttonStyle(BorderedButtonStyle(tint: .green))
-                    
-                }
+                            
+                    }
+                }).buttonStyle(BorderedButtonStyle(tint: .green))
                 Button("Restore Purchases", action: {
                     Task {
                         //This call displays a system prompt that asks users to authenticate with their App Store credentials.

@@ -15,8 +15,8 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "consumable.premium",
-      "referenceName" : "premium",
+      "productID" : "colorPicker",
+      "referenceName" : "Fidgets Premium",
       "type" : "NonConsumable"
     }
   ],

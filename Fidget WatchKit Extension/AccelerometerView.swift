@@ -192,7 +192,6 @@ struct AccelerometerView: View {
         self.frame = frame
         _motion = StateObject(wrappedValue: motionManager)
         self.showDebug = showDebug
-        self.motion.initUpdates()
     }
     
     

@@ -15,14 +15,15 @@ typealias RenewalState = StoreKit.Product.SubscriptionInfo.RenewalState
 
 public enum StoreError: Error {
     case failedVerification
+    case missingProduct
 }
 
-let premiumId = "consumable.premium"
+let premiumId = "colorPicker"
 
 class Store: ObservableObject {
 
-    @Published private(set) var products: [Product]
-    @Published private(set) var purchasedIdentifiers = Set<String>()
+    @Published private(set) var premiumProduct: Product? = nil
+    @Published private(set) var premiumPurchasedIdentifier: String? = nil
 
     var updateListenerTask: Task<Void, Error>? = nil
     private let productIds = [premiumId]
@@ -30,8 +31,6 @@ class Store: ObservableObject {
     init() {
         print("Initializing Store")
         //Initialize empty products then do a product request asynchronously to fill them in.
-        products = []
-
         //Start a transaction listener as close to app launch as possible so you don't miss any transactions.
         updateListenerTask = listenForTransactions()
 
@@ -57,7 +56,7 @@ class Store: ObservableObject {
                     let transaction = try self.checkVerified(result)
 
                     //Deliver content to the user.
-                    await self.updatePurchasedIdentifiers(transaction)
+                    self.updatePurchasedIdentifiers(transaction)
 
                     //Always finish a transaction.
                     await transaction.finish()
@@ -74,14 +73,24 @@ class Store: ObservableObject {
         do {
             //Request products from the App Store using the identifiers defined in the Products.plist file.
             let storeProducts = try await Product.products(for: productIds)
-
+            print("Got \(storeProducts.count) products")
             //Filter the products into different categories based on their type.
-            for product in storeProducts {
-                products.append(product)
+            if storeProducts.count != 1 {
+                print("Did not find correct number of products!")
+            } else {
+                premiumProduct = storeProducts[0]
             }
 
         } catch {
             print("Failed product request: \(error)")
+        }
+    }
+    
+    func purchasePremium() async throws -> Transaction? {
+        if let product = premiumProduct {
+            return try await purchase(product)
+        } else {
+            throw StoreError.missingProduct
         }
     }
 
@@ -94,7 +103,7 @@ class Store: ObservableObject {
             let transaction = try checkVerified(verification)
 
             //Deliver content to the user.
-            await updatePurchasedIdentifiers(transaction)
+            updatePurchasedIdentifiers(transaction)
 
             //Always finish a transaction.
             await transaction.finish()
@@ -144,16 +153,14 @@ class Store: ObservableObject {
         }
     }
 
-    @MainActor
-    func updatePurchasedIdentifiers(_ transaction: Transaction) async {
+    func updatePurchasedIdentifiers(_ transaction: Transaction) {
         if transaction.revocationDate == nil {
             //If the App Store has not revoked the transaction, add it to the list of `purchasedIdentifiers`.
-            purchasedIdentifiers.insert(transaction.productID)
+            premiumPurchasedIdentifier =  transaction.productID
         } else {
             //If the App Store has revoked this transaction, remove it from the list of `purchasedIdentifiers`.
-            purchasedIdentifiers.remove(transaction.productID)
+            premiumPurchasedIdentifier = nil
         }
-        print("Updated purchased identifiers: \(purchasedIdentifiers)")
     }
 
 }

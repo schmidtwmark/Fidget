@@ -89,7 +89,7 @@
 		ED0F505D26ED143E008ABA66 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		ED0F506026ED1F75008ABA66 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS8.0.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		ED28234126E3A2E9006462E4 /* BreathingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathingView.swift; sourceTree = "<group>"; };
-		ED36A9642687B61D00E1AF02 /* Fidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED36A9642687B61D00E1AF02 /* Fidgets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fidgets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fidget WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A96D2687B62000E1AF02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED36A96F2687B62000E1AF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		ED36A9652687B61D00E1AF02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				ED36A9642687B61D00E1AF02 /* Fidget.app */,
+				ED36A9642687B61D00E1AF02 /* Fidgets.app */,
 				ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */,
 				ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */,
 				ED36A9892687B62000E1AF02 /* FidgetTests.xctest */,
@@ -244,7 +244,7 @@
 			);
 			name = Fidget;
 			productName = Fidget;
-			productReference = ED36A9642687B61D00E1AF02 /* Fidget.app */;
+			productReference = ED36A9642687B61D00E1AF02 /* Fidgets.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
 		ED36A9672687B61D00E1AF02 /* Fidget WatchKit App */ = {
@@ -590,6 +590,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Fidget WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = C2UW47HS8X;
 				ENABLE_PREVIEWS = YES;
@@ -599,7 +600,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.Fidget.watchkitapp.watchkitextension;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -614,6 +616,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Fidget WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = C2UW47HS8X;
 				ENABLE_PREVIEWS = YES;
@@ -623,7 +626,8 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.Fidget.watchkitapp.watchkitextension;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -639,11 +643,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = C2UW47HS8X;
 				IBSC_MODULE = Fidget_WatchKit_Extension;
 				INFOPLIST_FILE = "Fidget WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.Fidget.watchkitapp;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -659,11 +666,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = C2UW47HS8X;
 				IBSC_MODULE = Fidget_WatchKit_Extension;
 				INFOPLIST_FILE = "Fidget WatchKit App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.Fidget.watchkitapp;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -677,11 +687,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = C2UW47HS8X;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.Fidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch;
+				PRODUCT_NAME = Fidgets;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -690,11 +700,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = C2UW47HS8X;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.Fidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch;
+				PRODUCT_NAME = Fidgets;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
