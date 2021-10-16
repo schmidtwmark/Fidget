@@ -50,8 +50,8 @@ struct PurchaseView : View {
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                Text("Fidget Premium").foregroundColor(Color.purple)
-                Text("Fidget Premium includes:\n - App theming\n - Any future updates\n - Supporting an independent developer").font(.system(size: 12.0))
+                Text("Fidgets Premium").foregroundColor(Color.purple)
+                Text("Fidgets Premium includes:\n - App theming\n - Any future updates\n - Supporting an independent developer").font(.system(size: 12.0))
                 Button("Buy $0.99", action : {
                     Task {
                         do {

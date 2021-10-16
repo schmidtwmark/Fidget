@@ -29,7 +29,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ED36A9632687B61D00E1AF02"
-               BuildableName = "Fidget.app"
+               BuildableName = "Fidgets.app"
                BlueprintName = "Fidget"
                ReferencedContainer = "container:Fidget.xcodeproj">
             </BuildableReference>

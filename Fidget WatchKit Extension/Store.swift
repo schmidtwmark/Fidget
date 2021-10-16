@@ -18,7 +18,7 @@ public enum StoreError: Error {
     case missingProduct
 }
 
-let premiumId = "colorPicker"
+let premiumId = "colorPickerId"
 
 class Store: ObservableObject {
 
@@ -75,7 +75,7 @@ class Store: ObservableObject {
             let storeProducts = try await Product.products(for: productIds)
             print("Got \(storeProducts.count) products")
             //Filter the products into different categories based on their type.
-            if storeProducts.count != 1 {
+            if storeProducts.count == 1 {
                 print("Did not find correct number of products!")
             } else {
                 premiumProduct = storeProducts[0]
