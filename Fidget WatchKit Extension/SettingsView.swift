@@ -14,27 +14,34 @@ struct ColorPickerView : View {
     
     @State var selection : MSColor
     @EnvironmentObject var settings : AppSettings
+    let cornerRadius = 8.0
     
     func getViewFor(color: MSColor) -> some View{
         return Text(color.key).tag(color).foregroundColor(color.rawColor)
     }
     var body : some View {
         VStack {
-            Picker("App Color Theme", selection: $selection) {
-                getViewFor(color: MSColor(rawColor: Color("Purple"), key: "Purple"))
-                getViewFor(color: MSColor(rawColor: Color("Blue"), key: "Blue"))
-                getViewFor(color: MSColor(rawColor: Color("Green"), key: "Green"))
-                getViewFor(color: MSColor(rawColor: Color("Mint"), key: "Mint"))
-                getViewFor(color: MSColor(rawColor: Color("Orange"), key: "Orange"))
-                getViewFor(color: MSColor(rawColor: Color("Pink"), key: "Pink"))
-                getViewFor(color: MSColor(rawColor: Color("Red"), key: "Red"))
-                getViewFor(color: MSColor(rawColor: Color("White"), key: "White"))
-                getViewFor(color: MSColor(rawColor: Color("Yellow"), key: "Yellow"))
+            Text("App Color Theme").foregroundColor(settings.color.rawColor)
+            ZStack {
+                Picker("App Color Theme", selection: $selection) {
+                    getViewFor(color: MSColor(rawColor: Color("Purple"), key: "Purple"))
+                    getViewFor(color: MSColor(rawColor: Color("Blue"), key: "Blue"))
+                    getViewFor(color: MSColor(rawColor: Color("Green"), key: "Green"))
+                    getViewFor(color: MSColor(rawColor: Color("Mint"), key: "Mint"))
+                    getViewFor(color: MSColor(rawColor: Color("Orange"), key: "Orange"))
+                    getViewFor(color: MSColor(rawColor: Color("Pink"), key: "Pink"))
+                    getViewFor(color: MSColor(rawColor: Color("Red"), key: "Red"))
+                    getViewFor(color: MSColor(rawColor: Color("White"), key: "White"))
+                    getViewFor(color: MSColor(rawColor: Color("Yellow"), key: "Yellow"))
+                }.labelsHidden()
+                RoundedRectangle(cornerSize: CGSize(width: 2.0, height: 2.0))
+                    .strokeBorder(.black, lineWidth: 6) // Hide the edges with a wide black border
+                RoundedRectangle(cornerSize: CGSize(width: cornerRadius, height: cornerRadius))
+                    .strokeBorder(settings.color.rawColor, lineWidth: 2) // Color the border as I like it
             }
             Button("Confirm", action: {
                 print("Saving color")
                 settings.color = selection
-                
             })
         }
     }
@@ -46,14 +53,16 @@ struct PurchaseView : View {
     @EnvironmentObject var store: Store
     @State var errorTitle = ""
     @State var isShowingError: Bool = false
+    @State var isPurchasing: Bool = false
     
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
                 Text("Fidgets Premium").foregroundColor(Color.purple)
                 Text("Fidgets Premium includes:\n - App theming\n - Any future updates\n - Supporting an independent developer").font(.system(size: 12.0))
-                Button("Buy $0.99", action : {
+                isPurchasing ? AnyView(ProgressView()) : AnyView(Button("Buy $0.99", action : {
                     Task {
+                        isPurchasing = true
                         do {
                             if try await store.purchasePremium() != nil {
                                 print("Successful payment")
@@ -70,9 +79,10 @@ struct PurchaseView : View {
                         } catch {
                             print("Failed purchase for \(premiumId): \(error)")
                         }
+                        isPurchasing = false
                             
                     }
-                }).buttonStyle(BorderedButtonStyle(tint: .green))
+                }).buttonStyle(BorderedButtonStyle(tint: .green)))
                 Button("Restore Purchases", action: {
                     Task {
                         //This call displays a system prompt that asks users to authenticate with their App Store credentials.
