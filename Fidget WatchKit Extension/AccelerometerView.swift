@@ -11,9 +11,9 @@ class MotionManager : ObservableObject {
     private var playHapticCallback: (Double) -> Void
     private let frame: Frame
     private let collisionFactor = 0.8
-    private let gravityFactor = 10.0
+    private let gravityFactor = 30.0
 //    private let frictionFactor = 0.01
-    private let frictionFactor = 0.00
+    private let frictionFactor = 0.02
     private var run: Bool = false
     
     @Published
@@ -206,7 +206,9 @@ struct AccelerometerView: View {
                 .strokeBorder(settings.color.rawColor, lineWidth: 4)
                 .frame(width: self.frame.width, height: self.frame.height)
                 .position(x: self.frame.left + (self.frame.width / 2.0), y: self.frame.top + (self.frame.height / 2.0))
-        }
+        }.onDisappear(perform: {
+            motion.stopUpdates()
+        })
 //        }.background(Color.gray)
 //         TO ENABLE DEBUG STUFF
             // TODO DISABLE BEFORE SHIPPING

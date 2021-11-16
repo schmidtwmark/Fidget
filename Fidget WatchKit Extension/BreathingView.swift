@@ -77,13 +77,14 @@ struct BreatheView: View{
                                 .repeatForever() : Animation.default, value: isRunning)
                 Spacer()
             Button(action: {
-                isRunning = nil
             }) {
                 Text("Hold to Start")
             }
-            .onTouchDownGesture {
+            .onTouchDownGesture(downCallback: {
                 isRunning = Date()
-            }
+            }, upCallback: {
+                isRunning = nil
+            })
             .buttonStyle(MSButtonStyle())
         }.onReceive(timer) {
             input in

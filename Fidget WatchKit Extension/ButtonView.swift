@@ -24,21 +24,23 @@ struct ButtonView: View {
     var body: some View {
         ZStack {
             Button(action: {
-                isPressed = false
-                hapticCallback(0.0)
-                
             }){
                 Text("Press")
-            }.onTouchDownGesture {
+            }.onTouchDownGesture(downCallback: {
                 hapticCallback(0.0)
                 isPressed = true
-            }.buttonStyle(MSButtonStyle())
+            }, upCallback: {
+                isPressed = false
+                hapticCallback(0.0)
+            }) .buttonStyle(MSButtonStyle())
             Circle().fill(settings.color.rawColor)
                 .frame(width: 100.0,  height: 100.0)
                 .scaleEffect(isPressed ? 5.0 : 0.0, anchor: .center)
                 .animation(isPressed ? Animation.easeInOut(duration: 1.5) : Animation.default, value: isPressed)
                 .opacity(isPressed ? 0.7 : 0.1)
-            }
+        }.onDisappear(perform: {
+            isPressed = false
+        })
        
     }
 }
