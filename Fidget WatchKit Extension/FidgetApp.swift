@@ -37,12 +37,54 @@ func getFrame(_ deviceBounds: CGSize) -> Frame{
     }
 }
 
+class ExtensionDelegate : NSObject, WKExtensionDelegate {
+//    override init() {
+//        print("Initializing extension delegate")
+//        super.init()
+//    }
+//
+    private var motion: MotionManager?
+    private var tabViewManager: TabViewManager?
+    func setMotionManager(motion: MotionManager) {
+        self.motion = motion
+    }
+    func setTabViewManager(tabViewManager: TabViewManager) {
+        self.tabViewManager = tabViewManager
+    }
+    
+    func applicationDidBecomeActive() {
+        print("Active app")
+        if let motion = self.motion, let tabManager = self.tabViewManager{
+            if tabManager.selection == 2 {
+                motion.resetPlayer()
+                motion.initUpdates()
+            }
+            
+        }
+    }
+    func applicationDidEnterBackground() {
+        print("Deactivating app")
+        if let motion = self.motion {
+            motion.stopUpdates()
+        }
+    }
+    
+    func deviceOrientationDidChange() {
+        print("Orientation changed")
+        if let motion = self.motion {
+            motion.invert = WKInterfaceDevice.current().crownOrientation == .left
+        }
+    }
+}
+
 @main
 struct FidgetApp: App {
+    @WKExtensionDelegateAdaptor(ExtensionDelegate.self) var extensionDelegate
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                ContentView(frame: getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: watchHaptic)
+                ContentView(frame: getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: watchHaptic, delegate: extensionDelegate)
             }
         }
     }

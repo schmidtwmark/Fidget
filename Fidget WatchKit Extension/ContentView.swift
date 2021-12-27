@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import CoreMotion
+import UIKit
 
 let SHOW_DEBUG = false
 
@@ -78,15 +79,18 @@ struct ContentView : View  {
     @StateObject var settings : AppSettings = AppSettings()
     @StateObject var store: Store = Store()
 
-    init(frame: Frame, hapticCallback: @escaping (Double) -> Void ) {
+    init(frame: Frame, hapticCallback: @escaping (Double) -> Void , delegate: ExtensionDelegate) {
         self.frame = frame
-        let motion = MotionManager(frame: frame, playHaptic: hapticCallback)
+        let motion = MotionManager(frame: frame, playHaptic: hapticCallback, invert: WKInterfaceDevice.current().crownOrientation == .left)
         tabViewManager = TabViewManager(motion: motion)
+        delegate.setMotionManager(motion: motion)
+
         accelView = AccelerometerView(frame: frame, hapticCallback: hapticCallback, motionManager: motion, showDebug: SHOW_DEBUG)
         crownView = CrownView(frame: frame.size)
         buttonView = ButtonView(frame: frame.size, hapticCallback: hapticCallback)
         breatheView = BreatheView(frame: frame.size, hapticCallback: hapticCallback)
         settingsView = SettingsView()
+        delegate.setTabViewManager(tabViewManager: self.tabViewManager)
     }
     
     

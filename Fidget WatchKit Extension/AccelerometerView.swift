@@ -6,12 +6,13 @@ typealias AccelerationVector = SIMD2<Double>;
 typealias VelocityVector = SIMD2<Double>;
 typealias PositionVector = SIMD2<Double>;
 
-class MotionManager : ObservableObject {
+class MotionManager : NSObject, ObservableObject, WKExtensionDelegate{
     private var motionManager: CMMotionManager
     private var playHapticCallback: (Double) -> Void
     private let frame: Frame
     private let collisionFactor = 0.8
     private let gravityFactor = 30.0
+    public var invert: Bool
 //    private let frictionFactor = 0.01
     private let frictionFactor = 0.02
     private var run: Bool = false
@@ -36,6 +37,7 @@ class MotionManager : ObservableObject {
     }
     
     func stopUpdates() {
+        print("Stopping motion updates")
         self.run = false
         self.motionManager.stopAccelerometerUpdates()
     }
@@ -146,7 +148,8 @@ class MotionManager : ObservableObject {
             }
             
             if let accelData = accelerometerData {
-                self.gravitationalAcceleration = SIMD2<Double>(accelData.acceleration.x, -accelData.acceleration.y);
+                let modifier = self.invert ? -1.0 : 1.0
+                self.gravitationalAcceleration = SIMD2<Double>(modifier * accelData.acceleration.x, modifier * -accelData.acceleration.y);
                 self.tick()
             } else {
                 print("Invalid accelerometer data")
@@ -154,12 +157,16 @@ class MotionManager : ObservableObject {
         }
     }
     
-    init(frame: Frame, playHaptic: @escaping (Double) -> Void) {
+    init(frame: Frame, playHaptic: @escaping (Double) -> Void, invert: Bool) {
         self.frame = frame
+        self.invert = invert
         self.motionManager = CMMotionManager()
         self.playHapticCallback = playHaptic
         self.motionManager.accelerometerUpdateInterval = 1/60
+        super.init()
+        
         self.resetPlayer()
+        
     }
 }
 
@@ -206,7 +213,8 @@ struct AccelerometerView: View {
                 .strokeBorder(settings.color.rawColor, lineWidth: 4)
                 .frame(width: self.frame.width, height: self.frame.height)
                 .position(x: self.frame.left + (self.frame.width / 2.0), y: self.frame.top + (self.frame.height / 2.0))
-        }.onDisappear(perform: {
+        }
+        .onDisappear(perform: {
             motion.stopUpdates()
         })
 //        }.background(Color.gray)
