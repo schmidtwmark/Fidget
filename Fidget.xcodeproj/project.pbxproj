@@ -23,8 +23,10 @@
 		ED5C29FD26ACB3EC0073E55A /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5C29FC26ACB3EC0073E55A /* ButtonView.swift */; };
 		ED5C29FF26ACEFD60073E55A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5C29FE26ACEFD50073E55A /* SettingsView.swift */; };
 		ED5C2A0126AD86A10073E55A /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5C2A0026AD86A10073E55A /* DataModel.swift */; };
+		ED788EEC2781EE0D008674CA /* JoystickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED788EEB2781EE0D008674CA /* JoystickView.swift */; };
 		ED8B77D226AB8FD000E60027 /* AccelerometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8B77D126AB8FD000E60027 /* AccelerometerView.swift */; };
 		ED8B77D526AC9C1A00E60027 /* CrownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8B77D426AC9C1A00E60027 /* CrownView.swift */; };
+		EDC8F260277A619100132907 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8F25F277A619100132907 /* SwitchView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,8 +111,10 @@
 		ED5C29FC26ACB3EC0073E55A /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		ED5C29FE26ACEFD50073E55A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		ED5C2A0026AD86A10073E55A /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		ED788EEB2781EE0D008674CA /* JoystickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoystickView.swift; sourceTree = "<group>"; };
 		ED8B77D126AB8FD000E60027 /* AccelerometerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccelerometerView.swift; sourceTree = "<group>"; };
 		ED8B77D426AC9C1A00E60027 /* CrownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrownView.swift; sourceTree = "<group>"; };
+		EDC8F25F277A619100132907 /* SwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,8 @@
 				ED5C2A0026AD86A10073E55A /* DataModel.swift */,
 				ED8B77D426AC9C1A00E60027 /* CrownView.swift */,
 				ED36A9792687B62000E1AF02 /* ContentView.swift */,
+				EDC8F25F277A619100132907 /* SwitchView.swift */,
+				ED788EEB2781EE0D008674CA /* JoystickView.swift */,
 				ED36A97B2687B62000E1AF02 /* FidgetApp.swift */,
 				ED36A97D2687B62000E1AF02 /* ComplicationController.swift */,
 				ED36A97F2687B62000E1AF02 /* Assets.xcassets */,
@@ -421,8 +427,10 @@
 				ED36A97C2687B62000E1AF02 /* FidgetApp.swift in Sources */,
 				ED5C29FD26ACB3EC0073E55A /* ButtonView.swift in Sources */,
 				ED36A97A2687B62000E1AF02 /* ContentView.swift in Sources */,
+				EDC8F260277A619100132907 /* SwitchView.swift in Sources */,
 				ED5C2A0126AD86A10073E55A /* DataModel.swift in Sources */,
 				ED36A97E2687B62000E1AF02 /* ComplicationController.swift in Sources */,
+				ED788EEC2781EE0D008674CA /* JoystickView.swift in Sources */,
 				ED8B77D526AC9C1A00E60027 /* CrownView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -72,6 +72,8 @@ struct ContentView : View  {
     var buttonView: ButtonView
     var settingsView: SettingsView
     var breatheView: BreatheView
+    var switchView: SwitchView
+    var joystickView: JoystickView
     var frame: Frame
     
     @ObservedObject var tabViewManager: TabViewManager
@@ -89,6 +91,8 @@ struct ContentView : View  {
         crownView = CrownView(frame: frame.size)
         buttonView = ButtonView(frame: frame.size, hapticCallback: hapticCallback)
         breatheView = BreatheView(frame: frame.size, hapticCallback: hapticCallback)
+        switchView = SwitchView(frame: frame, hapticCallback: hapticCallback)
+        joystickView = JoystickView(frame: frame, hapticCallback: hapticCallback)
         settingsView = SettingsView()
         delegate.setTabViewManager(tabViewManager: self.tabViewManager)
     }
@@ -96,9 +100,11 @@ struct ContentView : View  {
     
     var body: some View {
         TabView(selection: $tabViewManager.selection) {
+            joystickView.tag(7)
             crownView.tag(4)
             accelView.tag(2)
             buttonView.tag(3)
+            switchView.tag(6)
             breatheView.tag(1)
             settingsView.tag(5)
         }.environmentObject(settings).environmentObject(store).navigationBarHidden(frame.hideNavBar)

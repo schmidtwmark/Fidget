@@ -18,6 +18,12 @@ class MotionManager : NSObject, ObservableObject, WKExtensionDelegate{
     private var run: Bool = false
     
     @Published
+    var goalPosition = SIMD2<Double>(0.0, 0.0)
+    
+    @Published
+    var goalCount = 0
+    
+    @Published
     var gravitationalAcceleration: AccelerationVector = SIMD2<Double>(0.0, 0.0)
     
     @Published
@@ -46,6 +52,9 @@ class MotionManager : NSObject, ObservableObject, WKExtensionDelegate{
         self.playerPosition = SIMD2<Double>(self.frame.width / 2.0 , self.frame.height / 2.0)
         self.playerVelocity = SIMD2<Double>(-50.0, 50.0)
         self.gravitationalAcceleration = SIMD2<Double>(0.0, 0.0)
+        
+        self.goalPosition = newGoalPosition()
+        self.goalCount = 0
     }
     
     func getCornerCollision(lastX: Double, lastY: Double, offset: CGSize) {
@@ -130,7 +139,23 @@ class MotionManager : NSObject, ObservableObject, WKExtensionDelegate{
                 self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.right - self.frame.cornerRadius, height: self.frame.bottom - self.frame.cornerRadius))
             }
         }
-
+        
+        // CHECK COLLISION WITH GOAL
+        
+        if abs(self.goalPosition.x - self.playerPosition.x) < 10.0 && abs(self.goalPosition.y - self.playerPosition.y) < 10.0 {
+            print("Hit goal")
+            self.goalPosition = newGoalPosition()
+            self.playHapticCallback(0.0)
+            self.goalCount = (self.goalCount + 1) % 100
+        }
+        
+    }
+    
+    func newGoalPosition() -> PositionVector {
+        return SIMD2<Double>(
+            Double.random(in: (self.frame.left + 20.0)..<(self.frame.right - 20.0)),
+            Double.random(in: (self.frame.top + 20.0)..<(self.frame.bottom - 20.0))
+        )
     }
     
     func initUpdates() {
@@ -143,7 +168,6 @@ class MotionManager : NSObject, ObservableObject, WKExtensionDelegate{
             }
             
             guard self.run else {
-                print("Ignoring results")
                 return
             }
             
@@ -191,6 +215,8 @@ struct AccelerometerView: View {
     @EnvironmentObject var settings: AppSettings 
 
     var showDebug: Bool
+    
+    @State var showScore: Bool = true
     var frame: Frame
 
 //    let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect() // TODO disable before shipping
@@ -206,6 +232,14 @@ struct AccelerometerView: View {
     var body: some View {
         ZStack {
             Circle().fill(settings.color.rawColor).frame(width: 20.0, height: 20.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
+            ZStack {
+                if self.showScore {
+                    Text("\(motion.goalCount)").font(.system(size: 10)).foregroundColor(settings.color.rawColor)
+                }
+                Circle().stroke(settings.color.rawColor).frame(width: 20.0, height: 20.0)
+                
+            }.position(x: motion.goalPosition.x, y: motion.goalPosition.y)
+
             if self.showDebug {
                 AccelerometerDebugView(motion: motion)
             }
@@ -213,6 +247,11 @@ struct AccelerometerView: View {
                 .strokeBorder(settings.color.rawColor, lineWidth: 4)
                 .frame(width: self.frame.width, height: self.frame.height)
                 .position(x: self.frame.left + (self.frame.width / 2.0), y: self.frame.top + (self.frame.height / 2.0))
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            print("On tap, toggling show score")
+            self.showScore = !self.showScore
         }
         .onDisappear(perform: {
             motion.stopUpdates()
@@ -224,5 +263,10 @@ struct AccelerometerView: View {
 //            input in
 //            self.motion.tick()
 //        }
+    }
+}
+struct AccelerometerView_Previews: PreviewProvider {
+    static var previews: some View {
+        AccelerometerView(frame:  getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: { (Double) -> Void in }, motionManager: MotionManager(frame: getFrame(WKInterfaceDevice.current().screenBounds.size), playHaptic: { (Double) -> Void in }, invert: false), showDebug: false).previewDevice("Apple Watch Series 7 - 41mm").environmentObject(AppSettings())
     }
 }
