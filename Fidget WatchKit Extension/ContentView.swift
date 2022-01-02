@@ -100,11 +100,11 @@ struct ContentView : View  {
     
     var body: some View {
         TabView(selection: $tabViewManager.selection) {
-            joystickView.tag(7)
             crownView.tag(4)
             accelView.tag(2)
-            buttonView.tag(3)
+            joystickView.tag(7)
             switchView.tag(6)
+            buttonView.tag(3)
             breatheView.tag(1)
             settingsView.tag(5)
         }.environmentObject(settings).environmentObject(store).navigationBarHidden(frame.hideNavBar)
