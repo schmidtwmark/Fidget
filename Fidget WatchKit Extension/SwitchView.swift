@@ -54,7 +54,6 @@ struct Switch : View {
     let location: RoundCorner
     let color: Color
     let character: String
-    let haptic: (Double) -> Void
     @ObservedObject var state: SwitchState
     
     func pressed() -> Bool {
@@ -67,14 +66,6 @@ struct Switch : View {
             MSRoundRectangle(round: [location], radius: 8.0)
                 .stroke(color, lineWidth: 4)
             Text(character).bold().foregroundColor(color)
-        }.onTapGesture {
-            if(!pressed()) {
-                withAnimation(.easeInOut(duration: 0.25)) {
-                    state.topPressed = !state.topPressed
-                }
-            }
-            self.haptic(0.0)
-            
         }
     }
 }
@@ -87,7 +78,14 @@ struct SwitchView: View {
     @StateObject var state = SwitchState()
     private let frame: Frame
     var hapticCallback: (Double) -> Void
-
+    
+    func press() {
+        withAnimation(.easeInOut(duration: 0.25)) {
+            state.topPressed = !state.topPressed
+        }
+        self.hapticCallback(0.0)
+        
+    }
     init(frame: Frame, hapticCallback: @escaping (Double) -> Void) {
         self.frame = frame
         self.hapticCallback = hapticCallback
@@ -96,10 +94,32 @@ struct SwitchView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: self.frame.cornerRadius).fill(settings.color.rawColor).scaleEffect(state.topPressed ? 1.05 : 0.0).opacity(0.2).allowsHitTesting(false).frame(width: self.frame.width, height: self.frame.height)
-            VStack(spacing: 0.0){
-                Switch(location: .top, color: settings.color.rawColor, character: "I", haptic: self.hapticCallback, state: state)
-                Switch(location: .bottom, color: settings.color.rawColor, character: "O", haptic: self.hapticCallback, state: state)
-            }.frame(width: self.frame.width * 0.5, height: self.frame.height * 0.6)
+
+            ZStack {
+                // This is so dumb. SwiftUI decides to fudge gestures a bit, so either the switch has to be teeny tiny to leave room for your finger to swipe between screens, or I have to put the drag recognizer on a hidden view atop the switches. So dumb
+                GeometryReader { geo in
+                    let area = CGRect(x:0, y:0, width: geo.size.width, height: geo.size.height)
+                    let gestureWidth = 20.0
+                    Rectangle()
+                        .frame(width: gestureWidth, height: geo.size.height)
+                        .offset(x: geo.size.width / 2.0 - gestureWidth / 2.0, y: 0.0)
+                        .gesture(DragGesture(minimumDistance: 0.0).onChanged({
+                            gesture in
+                            guard area.contains(gesture.startLocation) else { return }
+                            let position = gesture.location
+                            let frame = geo.size
+                            let y = position.y
+                            let separator = frame.height / 2.0
+                            if ((y > separator) == state.topPressed) {
+                                press()
+                            }
+                        }))
+                }
+                VStack(spacing: 0.0){
+                    Switch(location: .top, color: settings.color.rawColor, character: "I", state: state)
+                    Switch(location: .bottom, color: settings.color.rawColor, character: "O", state: state)
+                }.allowsHitTesting(false)
+            }.frame(width: self.frame.width * 0.3, height: self.frame.height * 0.5)
         }.onDisappear(perform: {
             state.topPressed = false
         })
