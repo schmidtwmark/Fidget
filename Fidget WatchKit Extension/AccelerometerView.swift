@@ -212,7 +212,7 @@ struct AccelerometerView: View {
     @StateObject
     var motion: MotionManager
 
-    @EnvironmentObject var settings: AppSettings 
+    @EnvironmentObject var settings: AppSettings
 
     var showDebug: Bool
     
@@ -230,13 +230,14 @@ struct AccelerometerView: View {
     
 
     var body: some View {
+        settings.theme.getBackground().mask(
         ZStack {
-            Circle().fill(settings.color.rawColor).frame(width: 20.0, height: 20.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
+            Circle().fill(Color.white).frame(width: 20.0, height: 20.0).position(x: motion.playerPosition.x, y: motion.playerPosition.y)
             ZStack {
                 if self.showScore {
-                    Text("\(motion.goalCount)").font(.system(size: 10)).foregroundColor(settings.color.rawColor)
+                   Text("\(motion.goalCount)").font(.system(size: 10))
                 }
-                Circle().stroke(settings.color.rawColor).frame(width: 20.0, height: 20.0)
+                Circle().stroke(Color.white).frame(width: 20.0, height: 20.0)
                 
             }.position(x: motion.goalPosition.x, y: motion.goalPosition.y)
 
@@ -244,10 +245,10 @@ struct AccelerometerView: View {
                 AccelerometerDebugView(motion: motion)
             }
             RoundedRectangle(cornerRadius: self.frame.cornerRadius, style: .continuous)
-                .strokeBorder(settings.color.rawColor, lineWidth: 4)
+                .strokeBorder(Color.white, lineWidth: 4)
                 .frame(width: self.frame.width, height: self.frame.height)
                 .position(x: self.frame.left + (self.frame.width / 2.0), y: self.frame.top + (self.frame.height / 2.0))
-        }
+        })
         .contentShape(Rectangle())
         .onTapGesture {
             print("On tap, toggling show score")

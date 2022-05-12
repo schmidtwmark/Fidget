@@ -13,10 +13,9 @@ import Combine
 
 struct BreatheIcon: View {
     let base = 20.0
-    @EnvironmentObject var settings : AppSettings
     
     var body: some View {
-        Rectangle().stroke(settings.color.rawColor)
+        Rectangle().stroke(Color.white)
             .frame(width: base,  height: base)
     }
 }
@@ -34,7 +33,7 @@ struct BreatheView: View{
     
     
     let timer = Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()
-
+    
     init(frame: CGSize, hapticCallback: @escaping (Double) -> Void) {
         self.hapticCallback = hapticCallback
         self.frame = frame
@@ -62,30 +61,30 @@ struct BreatheView: View{
             return "Square Breathing"
         }
     }
-
-
+    
+    
     var body: some View {
         VStack {
-            Text(self.message).foregroundColor(settings.color.rawColor)
-            Spacer()
-            
-            BreatheIcon()
+            settings.theme.getBackground().mask(Text(self.message)).frame(width: 150, height: 30)
+            settings.theme.getBackground().mask(
+                BreatheIcon()
                     .rotationEffect(Angle(degrees: isRunning != nil ? 315.0 : 0.0))
                     .scaleEffect(isRunning != nil ? 2.75 : 1.0, anchor: .center)
                     .animation(isRunning != nil ? Animation.easeInOut(duration: 4.0)
-                                .delay(4.0)
-                                .repeatForever() : Animation.default, value: isRunning)
-                Spacer()
+                        .delay(4.0)
+                        .repeatForever() : Animation.default, value: isRunning)
+            )
             Button(action: {
             }) {
-                Text("Hold to Start")
+                settings.theme.getBackground().mask(
+                    Text("Hold to Start"))
             }
             .onTouchDownGesture(downCallback: {
                 isRunning = Date()
             }, upCallback: {
                 isRunning = nil
             })
-            .buttonStyle(MSButtonStyle())
+            .buttonStyle(MSButtonStyle()).frame(width: 120, height: 30)
         }.onReceive(timer) {
             input in
             let oldMessage = self.message

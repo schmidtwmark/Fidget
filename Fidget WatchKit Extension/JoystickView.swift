@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct JoystickView: View {
-
+    
     @EnvironmentObject var settings : AppSettings
     
     @State var offset = CGSize.zero
@@ -22,12 +22,12 @@ struct JoystickView: View {
     
     var body: some View {
         ZStack {
-            Circle().fill(settings.color.rawColor).opacity(0.2).frame(width: self.frame.width * MAXIMUM, height: self.frame.height * MAXIMUM)
-            Circle()
-                .stroke(settings.color.rawColor)
-                .frame(width: self.frame.width * HANDLE, height: self.frame.height * HANDLE)
-                .offset(self.offset)
-                .gesture(
+            settings.theme.getBackground().mask(Circle().fill(Color.white).opacity(0.2).frame(width: self.frame.width * MAXIMUM, height: self.frame.height * MAXIMUM))
+            settings.theme.getBackground().mask(Circle()
+                .stroke(Color.white))
+            .frame(width: self.frame.width * HANDLE, height: self.frame.height * HANDLE)
+            .offset(self.offset)
+            .gesture(
                 DragGesture()
                     .onChanged { gesture in
                         let new_x = gesture.translation.width
@@ -50,7 +50,7 @@ struct JoystickView: View {
                         self.old_d_2 = d_2
                         
                     }
-
+                
                     .onEnded { _ in
                         self.hapticCallback(0.0)
                         withAnimation(.easeIn(duration: 0.1)) {
@@ -64,8 +64,8 @@ struct JoystickView: View {
     
 }
 
- struct JoystickView_Previews: PreviewProvider {
-     static var previews: some View {
-         JoystickView(frame:  getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: { (Double) -> Void in }).previewDevice("Apple Watch Series 7 - 41mm").environmentObject(AppSettings())
-     }
- }
+struct JoystickView_Previews: PreviewProvider {
+    static var previews: some View {
+        JoystickView(frame:  getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: { (Double) -> Void in }).previewDevice("Apple Watch Series 7 - 41mm").environmentObject(AppSettings())
+    }
+}

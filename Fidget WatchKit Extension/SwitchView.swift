@@ -19,7 +19,7 @@ struct MSRoundRectangle: Shape {
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
-                
+        
         let w = rect.size.width
         let h = rect.size.height
         
@@ -52,7 +52,6 @@ class SwitchState: ObservableObject {
 
 struct Switch : View {
     let location: RoundCorner
-    let color: Color
     let character: String
     @ObservedObject var state: SwitchState
     
@@ -62,17 +61,17 @@ struct Switch : View {
     var body: some View {
         ZStack {
             MSRoundRectangle(round: [location], radius: 8.0)
-                .fill(pressed() ? color : .black)
+                .fill(pressed() ? Color.white : Color.clear)
             MSRoundRectangle(round: [location], radius: 8.0)
-                .stroke(color, lineWidth: 4)
-            Text(character).bold().foregroundColor(color)
+                .stroke(Color.white, lineWidth: 4)
+            Text(character).bold()
         }
     }
 }
 
 
 struct SwitchView: View {
-
+    
     @EnvironmentObject var settings : AppSettings
     
     @StateObject var state = SwitchState()
@@ -90,44 +89,51 @@ struct SwitchView: View {
         self.frame = frame
         self.hapticCallback = hapticCallback
     }
-
+    
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: self.frame.cornerRadius).fill(settings.color.rawColor).scaleEffect(state.topPressed ? 1.05 : 0.0).opacity(0.2).allowsHitTesting(false).frame(width: self.frame.width, height: self.frame.height)
-
-            ZStack {
-                // This is so dumb. SwiftUI decides to fudge gestures a bit, so either the switch has to be teeny tiny to leave room for your finger to swipe between screens, or I have to put the drag recognizer on a hidden view atop the switches. So dumb
-                GeometryReader { geo in
-                    let area = CGRect(x:0, y:0, width: geo.size.width, height: geo.size.height)
-                    let gestureWidth = 20.0
-                    Rectangle()
-                        .frame(width: gestureWidth, height: geo.size.height)
-                        .offset(x: geo.size.width / 2.0 - gestureWidth / 2.0, y: 0.0)
-                        .gesture(DragGesture(minimumDistance: 0.0).onChanged({
-                            gesture in
-                            guard area.contains(gesture.startLocation) else { return }
-                            let position = gesture.location
-                            let frame = geo.size
-                            let y = position.y
-                            let separator = frame.height / 2.0
-                            if ((y > separator) == state.topPressed) {
-                                press()
-                            }
-                        }))
-                }
-                VStack(spacing: 0.0){
-                    Switch(location: .top, color: settings.color.rawColor, character: "I", state: state)
-                    Switch(location: .bottom, color: settings.color.rawColor, character: "O", state: state)
-                }.allowsHitTesting(false)
-            }.frame(width: self.frame.width * 0.3, height: self.frame.height * 0.5)
-        }.onDisappear(perform: {
-            state.topPressed = false
-        })
-       
+            // This is so dumb. SwiftUI decides to fudge gestures a bit, so either the switch has to be teeny tiny to leave room for your finger to swipe between screens, or I have to put the drag recognizer on a hidden view atop the switches. So dumb
+            GeometryReader { geo in
+                let area = CGRect(x:0, y:0, width: geo.size.width, height: geo.size.height)
+                let gestureWidth = 20.0
+                Rectangle()
+                    .fill(Color.black.opacity(0.0001))
+                    .frame(width: gestureWidth, height: geo.size.height)
+                    .offset(x: geo.size.width / 2.0 - gestureWidth / 2.0, y: 0.0)
+                    .gesture(DragGesture(minimumDistance: 0.0).onChanged({
+                        gesture in
+                        guard area.contains(gesture.startLocation) else { return }
+                        let position = gesture.location
+                        let frame = geo.size
+                        let y = position.y
+                        let separator = frame.height / 2.0
+                        if ((y > separator) == state.topPressed) {
+                            press()
+                        }
+                    }))
+            }
+            
+            settings.theme.getBackground().allowsHitTesting(false).mask(
+                ZStack {
+                    RoundedRectangle(cornerRadius: self.frame.cornerRadius).fill(Color.white).scaleEffect(state.topPressed ? 1.05 : 0.0).opacity(0.2).allowsHitTesting(false).frame(width: self.frame.width, height: self.frame.height)
+                    
+                    ZStack {
+                        VStack(spacing: 0.0){
+                            Switch(location: .top, character: "I", state: state)
+                            Switch(location: .bottom, character: "O", state: state)
+                        }.allowsHitTesting(false)
+                    }.frame(width: self.frame.width * 0.3, height: self.frame.height * 0.5)
+                }.onDisappear(perform: {
+                    state.topPressed = false
+                })
+            )
+        }
     }
 }
- struct SwitchView_Previews: PreviewProvider {
-     static var previews: some View {
-         SwitchView(frame:  getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: { (Double) -> Void in }).previewDevice("Apple Watch Series 3 - 42mm").environmentObject(AppSettings())
-     }
- }
+
+
+struct SwitchView_Previews: PreviewProvider {
+    static var previews: some View {
+        SwitchView(frame:  getFrame(WKInterfaceDevice.current().screenBounds.size), hapticCallback: { (Double) -> Void in }).previewDevice("Apple Watch Series 3 - 42mm").environmentObject(AppSettings())
+    }
+}

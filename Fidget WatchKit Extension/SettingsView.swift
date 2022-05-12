@@ -12,36 +12,37 @@ import StoreKit
 
 struct ColorPickerView : View {
     
-    @State var selection : MSColor
+    @State var selection : MSTheme
     @EnvironmentObject var settings : AppSettings
     let cornerRadius = 8.0
     
-    func getViewFor(color: MSColor) -> some View{
-        return Text(color.key).tag(color).foregroundColor(color.rawColor)
+    func getViewFor(theme: MSTheme) -> some View{
+        return theme.getBackground().mask(Text(theme.key)).tag(theme)
     }
     var body : some View {
         VStack {
-            Text("App Color Theme").foregroundColor(settings.color.rawColor)
+            settings.theme.getBackground().mask(Text("App Color Theme"))
             ZStack {
                 Picker("App Color Theme", selection: $selection) {
-                    getViewFor(color: MSColor(rawColor: Color("Purple"), key: "Purple"))
-                    getViewFor(color: MSColor(rawColor: Color("Blue"), key: "Blue"))
-                    getViewFor(color: MSColor(rawColor: Color("Green"), key: "Green"))
-                    getViewFor(color: MSColor(rawColor: Color("Mint"), key: "Mint"))
-                    getViewFor(color: MSColor(rawColor: Color("Orange"), key: "Orange"))
-                    getViewFor(color: MSColor(rawColor: Color("Pink"), key: "Pink"))
-                    getViewFor(color: MSColor(rawColor: Color("Red"), key: "Red"))
-                    getViewFor(color: MSColor(rawColor: Color("White"), key: "White"))
-                    getViewFor(color: MSColor(rawColor: Color("Yellow"), key: "Yellow"))
+                    Group {
+                        ForEach(SOLIDS, id: \.key) {
+                            getViewFor(theme: $0)
+                        }
+                    }
+                    Group {
+                        ForEach(GRADIENTS, id: \.key) {
+                            getViewFor(theme: $0)
+                        }
+                    }
                 }.labelsHidden()
                 RoundedRectangle(cornerSize: CGSize(width: 2.0, height: 2.0))
                     .strokeBorder(.black, lineWidth: 6) // Hide the edges with a wide black border
-                RoundedRectangle(cornerSize: CGSize(width: cornerRadius, height: cornerRadius))
-                    .strokeBorder(settings.color.rawColor, lineWidth: 2) // Color the border as I like it
+                settings.theme.getBackground().mask(RoundedRectangle(cornerSize: CGSize(width: cornerRadius, height: cornerRadius))
+                    .strokeBorder(Color.white, lineWidth: 2)) // Color the border as I like it
             }
             Button("Confirm", action: {
                 print("Saving color")
-                settings.color = selection
+                settings.theme = selection
             })
         }
     }
@@ -126,7 +127,7 @@ struct SettingsView : View {
 
     var body : some View {
         if settings.paid {
-            ColorPickerView(selection: settings.color)
+            ColorPickerView(selection: settings.theme)
         } else {
             PurchaseView()
         }

@@ -14,12 +14,13 @@ struct MSButtonStyle: ButtonStyle {
     
     
     func makeBody(configuration: Configuration) -> some View {
+        settings.theme.getBackground().mask(
         configuration.label
             .padding()
-            .foregroundColor(settings.color.rawColor)
-            .background(configuration.isPressed ? settings.color.rawColor : Color.clear)
+            .background(configuration.isPressed ? Color.white : Color.clear)
             .clipShape(RoundedRectangle(cornerRadius: 8.0))
-            .overlay(RoundedRectangle(cornerRadius: 8.0).stroke(settings.color.rawColor, lineWidth: 2.0))
+            .overlay(RoundedRectangle(cornerRadius: 8.0).stroke(Color.white, lineWidth: 2.0))
+        )
     }
 }
 

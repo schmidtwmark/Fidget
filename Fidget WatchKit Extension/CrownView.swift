@@ -34,13 +34,15 @@ struct CrownView: View{
     }
 
     var body: some View {
+        settings.theme.getBackground().mask(
         ZStack {
             ZStack {
-                Text("Spin").foregroundColor(settings.color.rawColor)
+                Text("Spin")
                 Triangle()
-                    .stroke(settings.color.rawColor, lineWidth: 3)
+                    .stroke(Color.white, lineWidth: 3)
             }.rotationEffect(.degrees(crownRotation), anchor: .center)
-        }.focusable().digitalCrownRotation($crownRotation, from: 0.0, through: 360.0, by: 10.0, sensitivity: .high, isContinuous: true)
+        }).focusable().digitalCrownRotation($crownRotation, from: 0.0, through: 360.0, by: 10.0, sensitivity: .high, isContinuous: true)
+        
        
     }
 }

@@ -11,36 +11,43 @@ import Combine
 
 
 struct ButtonView: View {
-
+    
     @EnvironmentObject var settings : AppSettings
     
     @State var isPressed = false
     var hapticCallback: (Double) -> Void
-
+    var frame: CGSize
+    
     init(frame: CGSize, hapticCallback: @escaping (Double) -> Void) {
+        self.frame = frame
         self.hapticCallback = hapticCallback
     }
-
+    
     var body: some View {
         ZStack {
+            settings.theme.getBackground().mask(
+                Circle().fill(Color.white)
+            )
+            .frame(width: 100.0,  height: 50.0)
+            .scaleEffect(isPressed ? 5.5 : 0.0, anchor: .center)
+            .animation(isPressed ? Animation.easeInOut(duration: 1.5) : Animation.default, value: isPressed)
+            .opacity(isPressed ? 0.7 : 0.1)
             Button(action: {
             }){
-                Text("Press")
+                settings.theme.getBackground().mask(
+                    Text("Press"))
             }.onTouchDownGesture(downCallback: {
                 hapticCallback(0.0)
+                print("Pressed")
                 isPressed = true
             }, upCallback: {
+                print("Unpressed")
                 isPressed = false
                 hapticCallback(0.0)
-            }) .buttonStyle(MSButtonStyle())
-            Circle().fill(settings.color.rawColor)
-                .frame(width: 100.0,  height: 100.0)
-                .scaleEffect(isPressed ? 5.0 : 0.0, anchor: .center)
-                .animation(isPressed ? Animation.easeInOut(duration: 1.5) : Animation.default, value: isPressed)
-                .opacity(isPressed ? 0.7 : 0.1)
+            }).buttonStyle(MSButtonStyle()).frame(width: 80, height: 40)
         }.onDisappear(perform: {
             isPressed = false
         })
-       
+        
     }
 }
