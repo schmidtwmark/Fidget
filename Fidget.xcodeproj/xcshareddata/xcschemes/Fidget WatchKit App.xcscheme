@@ -74,10 +74,8 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Fidgets">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ED36A9672687B61D00E1AF02"
@@ -85,7 +83,7 @@
             BlueprintName = "Fidget WatchKit App"
             ReferencedContainer = "container:Fidget.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
          identifier = "../../Fidget WatchKit Extension/Products.storekit">
       </StoreKitConfigurationFileReference>
@@ -96,10 +94,8 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Fidgets">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "ED36A9672687B61D00E1AF02"
@@ -107,16 +103,7 @@
             BlueprintName = "Fidget WatchKit App"
             ReferencedContainer = "container:Fidget.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "ED36A9672687B61D00E1AF02"
-            BuildableName = "Fidget WatchKit App.app"
-            BlueprintName = "Fidget WatchKit App"
-            ReferencedContainer = "container:Fidget.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

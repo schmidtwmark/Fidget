@@ -10,6 +10,29 @@ import SwiftUI
 import Combine
 import StoreKit
 
+
+func getDescription(inJune: Bool) -> String {
+    print("inJune: \(inJune)")
+    if inJune {
+       return "Fidgets Premium includes:\n - App theming\n - For the month of June, proceeds go to The Trevor Project to support LGBT youth"
+    } else {
+       return "Fidgets Premium includes:\n - App theming\n - Any future updates\n - Supporting an independent developer"
+    }
+}
+
+func dateInJune() -> Bool {
+    let now = Date()
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.month], from: now)
+    print("components: \(components)")
+    if let month = components.month {
+        return month == 6
+    }
+    return false
+ 
+    
+}
+
 struct ColorPickerView : View {
     
     @State var selection : MSTheme
@@ -60,7 +83,7 @@ struct PurchaseView : View {
         ScrollView {
             VStack(spacing: 10) {
                 Text("Fidgets Premium").foregroundColor(Color.purple)
-                Text("Fidgets Premium includes:\n - App theming\n - Any future updates\n - Supporting an independent developer").font(.system(size: 12.0))
+                Text(getDescription(inJune: dateInJune())).font(.system(size: 12.0))
                 isPurchasing ? AnyView(ProgressView()) : AnyView(Button("Buy $0.99", action : {
                     Task {
                         isPurchasing = true

@@ -136,9 +136,9 @@ let GRADIENTS = [
         Color(hex: "5584AC"),
     ], key: "Water"),
     MSTheme(colors: [
-        Color(hex: "F4E7EC"),
-        Color(hex: "C0EDFF"),
-        Color(hex: "FFFBFB"),
+        Color(hex: "C9ADE7"),
+        Color(hex: "C9ADE7"),
+        Color(hex: "FFFFFF"),
     ], key: "Air")]
 
 
