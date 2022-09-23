@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Dynamic
 
 func watchHaptic(velocity: Double) {
 //    print("Playing haptic, velocity is \(velocity)")
@@ -65,6 +66,8 @@ class ExtensionDelegate : NSObject, WKExtensionDelegate {
     
     func applicationDidBecomeActive() {
         print("Active app")
+        let app = Dynamic.PUICApplication.sharedPUICApplication()
+        app._setStatusBarTimeHidden(true, animated: false, completion: nil)
         if let motion = self.motion, let tabManager = self.tabViewManager{
             if tabManager.selection == 2 {
                 motion.resetPlayer()

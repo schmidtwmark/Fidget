@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,7 @@
 		ED788EEC2781EE0D008674CA /* JoystickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED788EEB2781EE0D008674CA /* JoystickView.swift */; };
 		ED8B77D226AB8FD000E60027 /* AccelerometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8B77D126AB8FD000E60027 /* AccelerometerView.swift */; };
 		ED8B77D526AC9C1A00E60027 /* CrownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8B77D426AC9C1A00E60027 /* CrownView.swift */; };
+		ED92C93328DE00DC00B61593 /* Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = ED92C93228DE00DC00B61593 /* Dynamic */; };
 		EDC8F260277A619100132907 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC8F25F277A619100132907 /* SwitchView.swift */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED92C93328DE00DC00B61593 /* Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +285,9 @@
 			dependencies = (
 			);
 			name = "Fidget WatchKit Extension";
+			packageProductDependencies = (
+				ED92C93228DE00DC00B61593 /* Dynamic */,
+			);
 			productName = "Fidget WatchKit Extension";
 			productReference = ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
@@ -360,6 +365,9 @@
 				Base,
 			);
 			mainGroup = ED36A95D2687B61D00E1AF02;
+			packageReferences = (
+				ED92C93128DE00DC00B61593 /* XCRemoteSwiftPackageReference "Dynamic" */,
+			);
 			productRefGroup = ED36A9652687B61D00E1AF02 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -863,6 +871,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ED92C93128DE00DC00B61593 /* XCRemoteSwiftPackageReference "Dynamic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mhdhejazi/Dynamic";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED92C93228DE00DC00B61593 /* Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED92C93128DE00DC00B61593 /* XCRemoteSwiftPackageReference "Dynamic" */;
+			productName = Dynamic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ED36A95E2687B61D00E1AF02 /* Project object */;
 }
