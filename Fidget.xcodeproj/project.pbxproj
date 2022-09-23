@@ -12,7 +12,6 @@
 		ED28234226E3A2E9006462E4 /* BreathingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28234126E3A2E9006462E4 /* BreathingView.swift */; };
 		ED36A9692687B61E00E1AF02 /* Fidget WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ED36A96E2687B62000E1AF02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED36A96D2687B62000E1AF02 /* Assets.xcassets */; };
-		ED36A9752687B62000E1AF02 /* Fidget WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ED36A97A2687B62000E1AF02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36A9792687B62000E1AF02 /* ContentView.swift */; };
 		ED36A97C2687B62000E1AF02 /* FidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36A97B2687B62000E1AF02 /* FidgetApp.swift */; };
 		ED36A97E2687B62000E1AF02 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED36A97D2687B62000E1AF02 /* ComplicationController.swift */; };
@@ -38,21 +37,14 @@
 			remoteGlobalIDString = ED36A9672687B61D00E1AF02;
 			remoteInfo = "Fidget WatchKit App";
 		};
-		ED36A9762687B62000E1AF02 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ED36A95E2687B61D00E1AF02 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = ED36A9732687B62000E1AF02;
-			remoteInfo = "Fidget WatchKit Extension";
-		};
-		ED36A98A2687B62000E1AF02 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ED36A95E2687B61D00E1AF02 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = ED36A9732687B62000E1AF02;
-			remoteInfo = "Fidget WatchKit Extension";
-		};
 		ED36A9952687B62000E1AF02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED36A95E2687B61D00E1AF02 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ED36A9672687B61D00E1AF02;
+			remoteInfo = "Fidget WatchKit App";
+		};
+		ED92C93528DE03BA00B61593 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ED36A95E2687B61D00E1AF02 /* Project object */;
 			proxyType = 1;
@@ -62,17 +54,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		ED36A9A02687B62000E1AF02 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				ED36A9752687B62000E1AF02 /* Fidget WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		ED36A9A42687B62000E1AF02 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,7 +77,6 @@
 		ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fidget WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A96D2687B62000E1AF02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED36A96F2687B62000E1AF02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Fidget WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED36A9792687B62000E1AF02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		ED36A97B2687B62000E1AF02 /* FidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FidgetApp.swift; sourceTree = "<group>"; };
 		ED36A97D2687B62000E1AF02 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -169,7 +149,6 @@
 			children = (
 				ED36A9642687B61D00E1AF02 /* Fidgets.app */,
 				ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */,
-				ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */,
 				ED36A9892687B62000E1AF02 /* FidgetTests.xctest */,
 				ED36A9942687B62000E1AF02 /* FidgetUITests.xctest */,
 			);
@@ -260,37 +239,20 @@
 			buildConfigurationList = ED36A9A12687B62000E1AF02 /* Build configuration list for PBXNativeTarget "Fidget WatchKit App" */;
 			buildPhases = (
 				ED36A9662687B61D00E1AF02 /* Resources */,
-				ED36A9A02687B62000E1AF02 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				ED36A9772687B62000E1AF02 /* PBXTargetDependency */,
-			);
-			name = "Fidget WatchKit App";
-			productName = "Fidget WatchKit App";
-			productReference = ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		ED36A9732687B62000E1AF02 /* Fidget WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ED36A99D2687B62000E1AF02 /* Build configuration list for PBXNativeTarget "Fidget WatchKit Extension" */;
-			buildPhases = (
 				ED36A9702687B62000E1AF02 /* Sources */,
 				ED36A9712687B62000E1AF02 /* Frameworks */,
-				ED36A9722687B62000E1AF02 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Fidget WatchKit Extension";
+			name = "Fidget WatchKit App";
 			packageProductDependencies = (
-				ED92C93228DE00DC00B61593 /* Dynamic */,
+				ED92C93428DE03BA00B61593 /* Dynamic */,
 			);
-			productName = "Fidget WatchKit Extension";
-			productReference = ED36A9742687B62000E1AF02 /* Fidget WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productName = "Fidget WatchKit App";
+			productReference = ED36A9682687B61E00E1AF02 /* Fidget WatchKit App.app */;
+			productType = "com.apple.product-type.application";
 		};
 		ED36A9882687B62000E1AF02 /* FidgetTests */ = {
 			isa = PBXNativeTarget;
@@ -303,7 +265,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				ED36A98B2687B62000E1AF02 /* PBXTargetDependency */,
+				ED92C93628DE03BA00B61593 /* PBXTargetDependency */,
 			);
 			name = FidgetTests;
 			productName = FidgetTests;
@@ -335,7 +297,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					ED36A9632687B61D00E1AF02 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -343,12 +305,9 @@
 					ED36A9672687B61D00E1AF02 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
-					ED36A9732687B62000E1AF02 = {
-						CreatedOnToolsVersion = 12.5.1;
-					};
 					ED36A9882687B62000E1AF02 = {
 						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = ED36A9732687B62000E1AF02;
+						TestTargetID = ED36A9672687B61D00E1AF02;
 					};
 					ED36A9932687B62000E1AF02 = {
 						CreatedOnToolsVersion = 12.5.1;
@@ -374,7 +333,6 @@
 			targets = (
 				ED36A9632687B61D00E1AF02 /* Fidget */,
 				ED36A9672687B61D00E1AF02 /* Fidget WatchKit App */,
-				ED36A9732687B62000E1AF02 /* Fidget WatchKit Extension */,
 				ED36A9882687B62000E1AF02 /* FidgetTests */,
 				ED36A9932687B62000E1AF02 /* FidgetUITests */,
 			);
@@ -393,16 +351,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED36A96E2687B62000E1AF02 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ED36A9722687B62000E1AF02 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 				ED36A9832687B62000E1AF02 /* Preview Assets.xcassets in Resources */,
 				ED36A9802687B62000E1AF02 /* Assets.xcassets in Resources */,
+				ED36A96E2687B62000E1AF02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,20 +418,15 @@
 			target = ED36A9672687B61D00E1AF02 /* Fidget WatchKit App */;
 			targetProxy = ED36A96A2687B61E00E1AF02 /* PBXContainerItemProxy */;
 		};
-		ED36A9772687B62000E1AF02 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = ED36A9732687B62000E1AF02 /* Fidget WatchKit Extension */;
-			targetProxy = ED36A9762687B62000E1AF02 /* PBXContainerItemProxy */;
-		};
-		ED36A98B2687B62000E1AF02 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = ED36A9732687B62000E1AF02 /* Fidget WatchKit Extension */;
-			targetProxy = ED36A98A2687B62000E1AF02 /* PBXContainerItemProxy */;
-		};
 		ED36A9962687B62000E1AF02 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = ED36A9672687B61D00E1AF02 /* Fidget WatchKit App */;
 			targetProxy = ED36A9952687B62000E1AF02 /* PBXContainerItemProxy */;
+		};
+		ED92C93628DE03BA00B61593 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ED36A9672687B61D00E1AF02 /* Fidget WatchKit App */;
+			targetProxy = ED92C93528DE03BA00B61593 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -601,70 +547,22 @@
 			};
 			name = Release;
 		};
-		ED36A99E2687B62000E1AF02 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_ASSET_PATHS = "\"Fidget WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = C2UW47HS8X;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Fidget WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
-			};
-			name = Debug;
-		};
-		ED36A99F2687B62000E1AF02 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_ASSET_PATHS = "\"Fidget WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = C2UW47HS8X;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Fidget WatchKit Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.0;
-			};
-			name = Release;
-		};
 		ED36A9A22687B62000E1AF02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = C2UW47HS8X;
-				IBSC_MODULE = Fidget_WatchKit_Extension;
 				INFOPLIST_FILE = "Fidget WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -681,13 +579,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = C2UW47HS8X;
-				IBSC_MODULE = Fidget_WatchKit_Extension;
 				INFOPLIST_FILE = "Fidget WatchKit App/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
 				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.markschmidt.FidgetWatch.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -743,7 +645,7 @@
 				SDKROOT = watchos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fidget WatchKit Extension.appex/Fidget WatchKit Extension";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fidget WatchKit App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Fidget WatchKit App";
 				WATCHOS_DEPLOYMENT_TARGET = 7.4;
 			};
 			name = Debug;
@@ -766,7 +668,7 @@
 				SDKROOT = watchos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fidget WatchKit Extension.appex/Fidget WatchKit Extension";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Fidget WatchKit App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Fidget WatchKit App";
 				WATCHOS_DEPLOYMENT_TARGET = 7.4;
 			};
 			name = Release;
@@ -825,15 +727,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		ED36A99D2687B62000E1AF02 /* Build configuration list for PBXNativeTarget "Fidget WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				ED36A99E2687B62000E1AF02 /* Debug */,
-				ED36A99F2687B62000E1AF02 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		ED36A9A12687B62000E1AF02 /* Build configuration list for PBXNativeTarget "Fidget WatchKit App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -885,6 +778,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		ED92C93228DE00DC00B61593 /* Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ED92C93128DE00DC00B61593 /* XCRemoteSwiftPackageReference "Dynamic" */;
+			productName = Dynamic;
+		};
+		ED92C93428DE03BA00B61593 /* Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = ED92C93128DE00DC00B61593 /* XCRemoteSwiftPackageReference "Dynamic" */;
 			productName = Dynamic;

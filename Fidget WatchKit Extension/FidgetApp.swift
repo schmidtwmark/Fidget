@@ -49,7 +49,7 @@ func getFrame(_ deviceBounds: CGSize) -> Frame{
     }
 }
 
-class ExtensionDelegate : NSObject, WKExtensionDelegate {
+class ExtensionDelegate : NSObject, WKApplicationDelegate {
 //    override init() {
 //        print("Initializing extension delegate")
 //        super.init()
@@ -93,7 +93,7 @@ class ExtensionDelegate : NSObject, WKExtensionDelegate {
 
 @main
 struct FidgetApp: App {
-    @WKExtensionDelegateAdaptor(ExtensionDelegate.self) var extensionDelegate
+    @WKApplicationDelegateAdaptor(ExtensionDelegate.self) var extensionDelegate
     
     var body: some Scene {
         WindowGroup {

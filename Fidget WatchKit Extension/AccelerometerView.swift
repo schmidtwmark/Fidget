@@ -6,7 +6,7 @@ typealias AccelerationVector = SIMD2<Double>;
 typealias VelocityVector = SIMD2<Double>;
 typealias PositionVector = SIMD2<Double>;
 
-class MotionManager : NSObject, ObservableObject, WKExtensionDelegate{
+class MotionManager : NSObject, ObservableObject, WKApplicationDelegate{
     private var motionManager: CMMotionManager
     private var playHapticCallback: (Double) -> Void
     private let frame: Frame

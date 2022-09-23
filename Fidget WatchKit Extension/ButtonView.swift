@@ -29,7 +29,7 @@ struct ButtonView: View {
                 Circle().fill(Color.white)
             )
             .frame(width: 100.0,  height: 50.0)
-            .scaleEffect(isPressed ? 5.5 : 0.0, anchor: .center)
+            .scaleEffect(isPressed ? 6.0 : 0.0, anchor: .center)
             .animation(isPressed ? Animation.easeInOut(duration: 1.5) : Animation.default, value: isPressed)
             .opacity(isPressed ? 0.7 : 0.1)
             Button(action: {
