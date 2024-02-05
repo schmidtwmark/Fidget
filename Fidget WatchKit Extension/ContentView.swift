@@ -49,7 +49,7 @@ struct Frame {
 final class TabViewManager: ObservableObject {
     @Published var selection: Int = 0 {
         didSet {
-            if selection == 2 {
+            if selection == FidgetViewType.accelerometer.rawValue {
                 motion.resetPlayer()
                 motion.initUpdates()
             } else {
@@ -74,12 +74,14 @@ struct ContentView : View  {
     var breatheView: BreatheView
     var switchView: SwitchView
     var joystickView: JoystickView
+    var reorderView: ReorderView
     var frame: Frame
     
     @ObservedObject var tabViewManager: TabViewManager
     
     @StateObject var settings : AppSettings = AppSettings()
     @StateObject var store: Store = Store()
+    @AppStorage("order") var orderString = orderToString(defaultOrder)
 
     init(frame: Frame, hapticCallback: @escaping (Double) -> Void , delegate: ExtensionDelegate) {
         self.frame = frame
@@ -94,19 +96,58 @@ struct ContentView : View  {
         switchView = SwitchView(frame: frame, hapticCallback: hapticCallback)
         joystickView = JoystickView(frame: frame, hapticCallback: hapticCallback)
         settingsView = SettingsView()
+        reorderView = ReorderView()
         delegate.setTabViewManager(tabViewManager: self.tabViewManager)
     }
+    
+    func typeToView(_ type: FidgetViewType) -> any View {
+        switch type {
+        case .accelerometer:
+            return accelView
+        case .crown:
+            return crownView
+        case .joystick:
+            return joystickView
+        case .lightswitch:
+            return switchView
+        case .button:
+            return buttonView
+        case .breathe:
+            return breatheView
+            
+        }
+        
+    }
+    
+    var ordered: [(FidgetViewType, any View)] {
+        stringToOrder(orderString).map({type in
+            return (type, typeToView(type))
+        })
+    }
+    
     
     
     var body: some View {
         TabView(selection: $tabViewManager.selection) {
-            crownView.tag(4)
-            accelView.tag(2)
-            joystickView.tag(7)
-            switchView.tag(6)
-            buttonView.tag(3)
-            breatheView.tag(1)
-            settingsView.tag(5)
+            ForEach(stringToOrder(orderString), content: { type in
+                switch type {
+                case .accelerometer:
+                    accelView.tag(type.rawValue)
+                case .crown:
+                    crownView.tag(type.rawValue)
+                case .joystick:
+                    joystickView.tag(type.rawValue)
+                case .lightswitch:
+                    switchView.tag(type.rawValue)
+                case .button:
+                    buttonView.tag(type.rawValue)
+                case .breathe:
+                    breatheView.tag(type.rawValue)
+                }
+            })
+            
+            reorderView.tag(1000)
+            settingsView.tag(500)
         }.environmentObject(settings).environmentObject(store).navigationBarHidden(frame.hideNavBar)
     }
 }

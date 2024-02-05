@@ -104,7 +104,6 @@ struct PurchaseView : View {
                             print("Failed purchase for \(premiumId): \(error)")
                         }
                         isPurchasing = false
-                            
                     }
                 }).buttonStyle(BorderedButtonStyle(tint: .green)))
                 Button("Restore Purchases", action: {

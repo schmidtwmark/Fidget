@@ -126,11 +126,6 @@ class Store: ObservableObject {
 
         let transaction = try checkVerified(result)
 
-        //Ignore revoked transactions, they're no longer purchased.
-
-        //For subscriptions, a user can upgrade in the middle of their subscription period. The lower service
-        //tier will then have the `isUpgraded` flag set and there will be a new transaction for the higher service
-        //tier. Ignore the lower service tier transactions which have been upgraded.
         return transaction.revocationDate == nil && !transaction.isUpgraded
     }
     
@@ -140,11 +135,6 @@ class Store: ObservableObject {
         //Check if the transaction passes StoreKit verification.
         switch result {
         case .unverified(_, let error):
-            //StoreKit has parsed the JWS but failed verification. Don't deliver content to the user.
-//            if error == VerificationResult.VerificationError.missingRequiredProperties {
-//                print("Missing required properties but allowing anyways. Maybe this is a testing thing")
-//                return safe
-//            }
             print("Unverified result: \(error)")
             throw StoreError.failedVerification
         case .verified(let safe):
