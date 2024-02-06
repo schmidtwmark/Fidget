@@ -63,7 +63,10 @@ class MotionManager : NSObject, ObservableObject, WKApplicationDelegate{
         let px = self.playerPosition.x - offset.width
         let py = self.playerPosition.y - offset.height;
         
-        if px * px + py * py > radiusSquared {
+        let distance = px * px + py * py
+        print("px: \(px) py: \(py) distance: \(distance) radiusSquared: \(radiusSquared)")
+        
+        if distance > radiusSquared {
             // Out of bounds
             let lastX = lastX - offset.width
             let lastY = lastY - offset.height
@@ -122,20 +125,24 @@ class MotionManager : NSObject, ObservableObject, WKApplicationDelegate{
         
         // ENTER CORNER BOUNCING SHIT
         
-        if self.playerPosition.x < self.frame.left - self.frame.cornerRadius {
-            if self.playerPosition.y < self.frame.top - self.frame.cornerRadius {
+        if self.playerPosition.x < self.frame.left + self.frame.cornerRadius {
+            if self.playerPosition.y < self.frame.top + self.frame.cornerRadius {
                 // TOP LEFT
-                self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.cornerRadius, height: self.frame.cornerRadius))
+                print("Top left collision: \(self.playerPosition), \(self.frame)")
+                self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.left + self.frame.cornerRadius, height: self.frame.top + self.frame.cornerRadius))
             } else if self.playerPosition.y > self.frame.bottom - self.frame.cornerRadius {
                 // BOTTOM LEFT
-                self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.cornerRadius, height: self.frame.bottom - self.frame.cornerRadius))
+                print("Bottom left collision: \(self.playerPosition), \(self.frame)")
+                self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.left + self.frame.cornerRadius, height: self.frame.bottom - self.frame.cornerRadius))
             }
         } else if self.playerPosition.x > self.frame.right - self.frame.cornerRadius {
-            if self.playerPosition.y < self.frame.top - self.frame.cornerRadius {
+            if self.playerPosition.y < self.frame.top + self.frame.cornerRadius {
                 // TOP RIGHT
-                self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.right - self.frame.cornerRadius, height: self.frame.cornerRadius))
+                print("Top right collision: \(self.playerPosition), \(self.frame)")
+                self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.right - self.frame.cornerRadius, height: self.frame.top + self.frame.cornerRadius))
             } else if self.playerPosition.y > self.frame.bottom - self.frame.cornerRadius {
                 // BOTTOM RIGHT
+                print("Bottom right collision: \(self.playerPosition), \(self.frame)")
                 self.getCornerCollision(lastX: lastX, lastY: lastY, offset: CGSize(width: self.frame.right - self.frame.cornerRadius, height: self.frame.bottom - self.frame.cornerRadius))
             }
         }
@@ -255,8 +262,15 @@ struct AccelerometerView: View {
             self.showScore = !self.showScore
         }
         .onDisappear(perform: {
+            print("On disappear: stopping updates")
             motion.stopUpdates()
+            motion.resetPlayer()
         })
+        .onAppear() {
+            print("On appear: starting updates")
+            motion.resetPlayer()
+            motion.initUpdates()
+        }
 //        }.background(Color.gray)
 //         TO ENABLE DEBUG STUFF
             // TODO DISABLE BEFORE SHIPPING

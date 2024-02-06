@@ -45,6 +45,8 @@ struct ReorderView : View {
     @AppStorage("order") var orderString = orderToString(defaultOrder)
     let shapeSize = 20.0
     
+    @EnvironmentObject var settings : AppSettings
+    
     var body: some View {
         NavigationView {
             List{
@@ -55,29 +57,39 @@ struct ReorderView : View {
                             Spacer()
                             switch viewType {
                             case .crown:
-                                Triangle().stroke(.purple).frame(width: shapeSize, height: shapeSize)
+                                settings.theme.getBackground().mask(
+                                Triangle().stroke(.white)).frame(width: shapeSize, height: shapeSize)
                             case .accelerometer:
+                                settings.theme.getBackground().mask(
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 5.0).stroke(.purple)
                                     Circle().stroke(.purple).frame(width: 5.0, height: 5.0)
-                                }.frame(width: shapeSize, height: shapeSize)
+                                }).frame(width: shapeSize, height: shapeSize)
                             case .joystick:
+                                settings.theme.getBackground().mask(
+
                                 ZStack {
                                     Circle().fill(.purple).opacity(0.5)
                                     Circle().stroke(.purple).frame(width: 10.0, height: 10.0)
-                                }.frame(width: shapeSize, height: shapeSize)
+                                }).frame(width: shapeSize, height: shapeSize)
                             case .lightswitch:
+                                settings.theme.getBackground().mask(
+
                                 VStack(spacing: 0.0) {
                                     MSRoundRectangle(round: [.top], radius: 5.0).stroke(.purple)
                                     ZStack {
                                         MSRoundRectangle(round: [.bottom], radius: 5.0).fill(.purple)
                                         MSRoundRectangle(round: [.bottom], radius: 5.0).stroke(.purple)
                                     }
-                                }.frame(width: shapeSize, height: shapeSize)
+                                }).frame(width: shapeSize, height: shapeSize)
                             case .button:
-                                RoundedRectangle(cornerRadius: 3.0).fill(.purple).frame(width: shapeSize, height: 10.0)
+                                settings.theme.getBackground().mask(
+
+                                RoundedRectangle(cornerRadius: 3.0).fill(.purple)).frame(width: shapeSize, height: 10.0)
                             case .breathe:
-                                Rectangle().stroke(.purple).frame(width: shapeSize, height: shapeSize)
+                                settings.theme.getBackground().mask(
+                                    Rectangle().stroke(.purple)
+                                ).frame(width: shapeSize, height: shapeSize)
                             }
                             
                         }
@@ -100,5 +112,6 @@ struct ReorderView : View {
  struct ContentView_Previews: PreviewProvider {
      static var previews: some View {
          ReorderView()
+             .environmentObject(AppSettings())
      }
  }

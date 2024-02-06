@@ -46,25 +46,25 @@ struct Frame {
     }
 }
 
-final class TabViewManager: ObservableObject {
-    @Published var selection: Int = 0 {
-        didSet {
-            if selection == FidgetViewType.accelerometer.rawValue {
-                motion.resetPlayer()
-                motion.initUpdates()
-            } else {
-                motion.stopUpdates()
-                motion.resetPlayer()
-            }
-        }
-    }
-    
-    var motion: MotionManager
-    init(motion: MotionManager) {
-        self.motion = motion
-        
-    }
-}
+//final class TabViewManager: ObservableObject {
+//    @Published var selection: Int = 0 {
+//        didSet {
+//            if selection == FidgetViewType.accelerometer.rawValue {
+//                motion.resetPlayer()
+//                motion.initUpdates()
+//            } else {
+//                motion.stopUpdates()
+//                motion.resetPlayer()
+//            }
+//        }
+//    }
+//    
+//    var motion: MotionManager
+//    init(motion: MotionManager) {
+//        self.motion = motion
+//        
+//    }
+//}
 
 struct ContentView : View  {
     var accelView: AccelerometerView 
@@ -77,7 +77,7 @@ struct ContentView : View  {
     var reorderView: ReorderView
     var frame: Frame
     
-    @ObservedObject var tabViewManager: TabViewManager
+//    @ObservedObject var tabViewManager: TabViewManager
     
     @StateObject var settings : AppSettings = AppSettings()
     @StateObject var store: Store = Store()
@@ -86,7 +86,7 @@ struct ContentView : View  {
     init(frame: Frame, hapticCallback: @escaping (Double) -> Void , delegate: ExtensionDelegate) {
         self.frame = frame
         let motion = MotionManager(frame: frame, playHaptic: hapticCallback, invert: WKInterfaceDevice.current().crownOrientation == .left)
-        tabViewManager = TabViewManager(motion: motion)
+//        tabViewManager = TabViewManager(motion: motion)
         delegate.setMotionManager(motion: motion)
 
         accelView = AccelerometerView(frame: frame, hapticCallback: hapticCallback, motionManager: motion, showDebug: SHOW_DEBUG)
@@ -97,7 +97,7 @@ struct ContentView : View  {
         joystickView = JoystickView(frame: frame, hapticCallback: hapticCallback)
         settingsView = SettingsView()
         reorderView = ReorderView()
-        delegate.setTabViewManager(tabViewManager: self.tabViewManager)
+//        delegate.setTabViewManager(tabViewManager: self.tabViewManager)
     }
     
     func typeToView(_ type: FidgetViewType) -> any View {
@@ -128,7 +128,7 @@ struct ContentView : View  {
     
     
     var body: some View {
-        TabView(selection: $tabViewManager.selection) {
+        TabView() {
             ForEach(stringToOrder(orderString), content: { type in
                 switch type {
                 case .accelerometer:
