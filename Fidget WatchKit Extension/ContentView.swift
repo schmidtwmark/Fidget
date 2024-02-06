@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import CoreMotion
 import UIKit
+import TipKit
 
 let SHOW_DEBUG = false
 
@@ -65,6 +66,36 @@ struct Frame {
 //        
 //    }
 //}
+
+struct IntroTip: Tip {
+    var title: Text {
+        Text("Fidgets 3.0")
+    }
+
+
+    var message: Text? {
+        Text("Swipe between 6 interactive fidget toys!\n\nSwipe all the way to the right to reorder fidgets and change color theme.")
+    }
+}
+
+struct HeadlineTipViewStyle: TipViewStyle {
+    var settings : AppSettings
+    
+    
+    func makeBody(configuration: TipViewStyle.Configuration) -> some View {
+
+            VStack(alignment: .leading, spacing: 8.0) {
+                HStack {
+                    configuration.title.foregroundStyle(settings.theme.colors.first!)
+                    Spacer()
+                    Button(action: { configuration.tip.invalidate(reason: .tipClosed) }) {
+                        Image(systemName: "xmark")
+                    }.buttonStyle(.plain).frame(width: 40, height: 40)
+                }
+                configuration.message?.font(.system(size: 12.0))
+            }.padding()
+    }
+}
 
 struct ContentView : View  {
     var accelView: AccelerometerView 
@@ -134,7 +165,10 @@ struct ContentView : View  {
                 case .accelerometer:
                     accelView.tag(type.rawValue)
                 case .crown:
-                    crownView.tag(type.rawValue)
+                    ZStack {
+                        crownView.tag(type.rawValue)
+                        TipView(IntroTip()).tipViewStyle(HeadlineTipViewStyle(settings: settings))
+                    }
                 case .joystick:
                     joystickView.tag(type.rawValue)
                 case .lightswitch:
@@ -149,6 +183,14 @@ struct ContentView : View  {
             reorderView.tag(1000)
             settingsView.tag(500)
         }.environmentObject(settings).environmentObject(store).navigationBarHidden(frame.hideNavBar)
+            .task {
+                    // Configure and load your tips at app launch.
+//                try! Tips.resetDatastore()
+                    try? Tips.configure([
+                        .displayFrequency(.immediate),
+                        .datastoreLocation(.applicationDefault)
+                    ])
+                }
     }
 }
 
