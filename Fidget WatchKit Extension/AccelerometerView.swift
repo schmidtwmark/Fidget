@@ -271,7 +271,7 @@ struct AccelerometerView: View {
             motion.resetPlayer()
             motion.initUpdates()
         }
-//        }.background(Color.gray)
+//        .background(Color.gray)
 //         TO ENABLE DEBUG STUFF
             // TODO DISABLE BEFORE SHIPPING
 //        .onReceive(timer) {

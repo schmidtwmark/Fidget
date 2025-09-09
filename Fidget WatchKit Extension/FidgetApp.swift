@@ -36,7 +36,18 @@ func getFrame(_ deviceBounds: CGSize) -> Frame{
         print("Detected 49 mm")
         let offset = 46.0
         return Frame(top: -offset, bottom: deviceBounds.height - offset, left: -1.0, right: deviceBounds.width - 2.0, cornerRadius: 54.0)
-        
+    case 187.0:
+        print("Detected 42mm")
+        let offset = 40.0
+        return Frame(top: -offset, bottom: deviceBounds.height - offset, left: -2.0, right: deviceBounds.width - 2.0, cornerRadius: 47.0)
+    case 208.0:
+        print("Detected 46mm")
+        let offset = 44.5
+        return Frame(top: -offset, bottom: deviceBounds.height - offset, left: -2.0, right: deviceBounds.width - 2.0, cornerRadius: 54.0)
+    case 211.0:
+        print("Detected 49mm Ultra 3")
+        let offset = 47.0
+        return Frame(top: -offset, bottom: deviceBounds.height - offset, left: -1.0, right: deviceBounds.width - 2.0, cornerRadius: 58.0)
     default:
         print("Unknown watch with width: \(deviceBounds.width)")
         return Frame(bottom: deviceBounds.height, right: deviceBounds.width, cornerRadius: 35.0)
